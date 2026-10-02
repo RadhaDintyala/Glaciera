@@ -76,6 +76,3 @@ npm run build
 
 ---
 
-## 🌐 GitHub Repository
-
-Maintained at: [RadhaDintyala/Glaciera](https://github.com/RadhaDintyala/Glaciera)
