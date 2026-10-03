@@ -4,6 +4,9 @@ import { Navbar } from './components/Navbar';
 import { LandingHeroContent } from './components/LandingPage';
 import { BharatiStationView } from './components/BharatiStationView';
 import { MaitriStationView } from './components/MaitriStationView';
+import { EnergyMicrogridView } from './components/Module2_Energy/EnergyMicrogridView';
+import { InventoryLogisticsView } from './components/Module3_Logistics/InventoryLogisticsView';
+import { LowBandwidthPredictiveView } from './components/Module4_Maintenance/LowBandwidthPredictiveView';
 import { InSituDatasetsBar } from './components/Layer1_InSituDatasets/InSituDatasetsBar';
 import { EdgeGatewayPanel } from './components/Layer2_EdgeGateway/EdgeGatewayPanel';
 import { SatcomControlPanel } from './components/Layer3_SatcomNetwork/SatcomControlPanel';
@@ -155,7 +158,7 @@ function FullConsoleView() {
 }
 
 function MainAppContent() {
-  const [activePage, setActivePage] = useState('overview'); // 'overview' | 'bharati' | 'maitri' | 'monitoring' | 'data' | 'console'
+  const [activePage, setActivePage] = useState('overview'); // 'overview' | 'bharati' | 'maitri' | 'energy' | 'logistics' | 'maintenance' | 'monitoring' | 'data' | 'console'
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
@@ -167,13 +170,13 @@ function MainAppContent() {
         {activePage === 'overview' && <LandingHeroContent />}
         {activePage === 'bharati' && <BharatiStationView />}
         {activePage === 'maitri' && <MaitriStationView />}
+        {activePage === 'energy' && <EnergyMicrogridView />}
+        {activePage === 'logistics' && <InventoryLogisticsView />}
+        {activePage === 'maintenance' && <LowBandwidthPredictiveView />}
         {activePage === 'monitoring' && <MonitoringPage />}
         {activePage === 'data' && <DataPage />}
         {activePage === 'console' && <FullConsoleView />}
       </div>
-
-      {/* Global Minimalist Footer */}
-    
     </div>
   );
 }
@@ -185,3 +188,4 @@ export default function App() {
     </TelemetryProvider>
   );
 }
+

@@ -9,6 +9,9 @@ export function TelemetryProvider({ children }) {
   const [telemetry, setTelemetry] = useState(INITIAL_TELEMETRY);
   const [history, setHistory] = useState([]);
   
+  // RBAC Access Control Role
+  const [activeRole, setActiveRole] = useState('COMMANDER'); // 'COMMANDER' | 'TECHNICIAN' | 'SCIENTIST' | 'MINISTRY'
+
   // 3D Viewport Controls
   const [viewPreset, setViewPreset] = useState('overview'); // 'overview', 'generators', 'radomes', 'living', 'stilts'
   const [isCutawayView, setIsCutawayView] = useState(false);
@@ -34,7 +37,8 @@ export function TelemetryProvider({ children }) {
   // Incident Alert Logs
   const [alerts, setAlerts] = useState([
     { id: 1, type: 'INFO', title: 'System Initialized', desc: 'Connected to NCPOR Telemetry API via SATCOM Uplink', time: new Date().toLocaleTimeString() },
-    { id: 2, type: 'WARNING', title: 'AWS Wind Shear Alert', desc: 'Bharati gust speed exceeds 48 knots ESE', time: new Date().toLocaleTimeString() }
+    { id: 2, type: 'WARNING', title: 'AWS Wind Shear Alert', desc: 'Bharati gust speed exceeds 48 knots ESE', time: new Date().toLocaleTimeString() },
+    { id: 3, type: 'CRITICAL', title: 'Predictive Anomaly ANOM-402', desc: 'CHP Pump 1 Cavitation detected at Bharati Level 1 Core', time: new Date().toLocaleTimeString() }
   ]);
 
   // Real-time telemetry tick loop (1.5s interval)
@@ -49,6 +53,7 @@ export function TelemetryProvider({ children }) {
             time: new Date().toLocaleTimeString().slice(0, 8),
             windKmh: next.bharati.aws.windSpeedKmh,
             maitriLoad: next.maitri.electricCircuits.totalLoadKw,
+            bharatiLoad: next.bharati.electricCircuits.totalLoadKw,
             riometerDb: next.maitri.riometer.absorptionDb,
             driftX: next.maitri.gpsSurface.driftX,
             ambientTemp: next.maitri.atmospheric.ambientTemp
@@ -102,11 +107,25 @@ export function TelemetryProvider({ children }) {
     setAlerts((prev) => [{ id: Date.now(), type, title, desc, time: new Date().toLocaleTimeString() }, ...prev]);
   };
 
+  const toggleSmartLoadShedding = (stationKey) => {
+    setTelemetry((prev) => {
+      const next = JSON.parse(JSON.stringify(prev));
+      if (next[stationKey]) {
+        const curr = next[stationKey].electricCircuits.smartLoadSheddingActive;
+        next[stationKey].electricCircuits.smartLoadSheddingActive = !curr;
+        triggerEdgeAction('SMART_LOAD_SHEDDING', `Smart Load Shedding on ${stationKey.toUpperCase()} set to ${!curr ? 'ENABLED' : 'DISABLED'}`);
+      }
+      return next;
+    });
+  };
+
   return (
     <TelemetryContext.Provider
       value={{
         activeStation,
         setActiveStation,
+        activeRole,
+        setActiveRole,
         telemetry,
         history,
         viewPreset,
@@ -138,7 +157,8 @@ export function TelemetryProvider({ children }) {
         alerts,
         addAlert,
         payloadMetrics,
-        triggerEdgeAction
+        triggerEdgeAction,
+        toggleSmartLoadShedding
       }}
     >
       {children}
