@@ -1,14 +1,10 @@
 import React, { useMemo, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 /**
  * 2D & 3D Ground Risk Heat Map Plane
- * Matches the user's reference image:
- * - Gradient background running from Green (Low Impact/Activity) -> Yellow -> Orange -> Red (High Impact/Activity)
- * - Interactive blue data points plotted across the ground plane: R1, R2, R3, R4, R5, R6, etc.
- * - Optimized with polygonOffset & depthWrite=false to prevent z-fighting flicker/shaking.
+ * Fixed Z-fighting by setting elevated Y layer, depthWrite=false, and polygonOffset.
+ * Renders vibrant risk gradient (Lime -> Yellow -> Orange -> Red) and blue sensor nodes.
  */
 export function GroundThermalHeatmap({ isVisible = true, isFaultActive = false }) {
   const meshRef = useRef();
@@ -21,20 +17,19 @@ export function GroundThermalHeatmap({ isVisible = true, isFaultActive = false }
     const ctx = canvas.getContext('2d');
 
     // Horizontal & Diagonal smooth gradient matching reference image
-    // Bottom-Left: Green (#65a30d) -> Center: Yellow (#facc15) -> Right: Red (#dc2626)
     const grad = ctx.createLinearGradient(0, 1024, 1024, 0);
     grad.addColorStop(0.0, '#65a30d'); // Bright Lime Green (Low Risk / Low Impact)
-    grad.addColorStop(0.3, '#a3e635'); 
-    grad.addColorStop(0.5, '#facc15'); // Yellow (Moderate Activity)
+    grad.addColorStop(0.25, '#84cc16');
+    grad.addColorStop(0.5, '#eab308'); // Yellow (Moderate Activity)
     grad.addColorStop(0.75, '#f97316'); // Orange (High Activity)
     grad.addColorStop(1.0, '#dc2626'); // Deep Red (High Impact / Critical)
 
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1024, 1024);
 
-    // Crisp Grid Lines Overlay
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-    ctx.lineWidth = 3;
+    // Crisp White Grid Lines Overlay
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 4;
     for (let i = 0; i <= 1024; i += 128) {
       ctx.beginPath();
       ctx.moveTo(i, 0);
@@ -52,67 +47,47 @@ export function GroundThermalHeatmap({ isVisible = true, isFaultActive = false }
     return texture;
   }, []);
 
-  // Risk Node Points plotted on the ground plane (matching R1, R2, R3 blue dots in image)
+  // Risk Node Sensor Points plotted on the ground plane (matching R1, R2, R3 blue dots)
   const riskNodes = [
-    { id: 'R3', label: 'R3: Hydraulic Stilts', x: -16, z: 2, color: '#2563eb' },
-    { id: 'R2', label: 'R2: Water Intake', x: -8, z: 8, color: '#2563eb' },
-    { id: 'R1', label: 'R1: Fuel Storage', x: -6, z: -4, color: '#2563eb' },
-    { id: 'R4', label: 'R4: CHP Generator', x: 4, z: -8, color: '#2563eb' },
-    { id: 'R5', label: 'R5: VSAT Satellite', x: 8, z: -2, color: '#2563eb' },
-    { id: 'R6', label: 'R6: Ice Sheet Margin', x: 18, z: -14, color: '#2563eb' },
+    { id: 'R3', label: 'R3: Hydraulic Stilts', x: -16, z: 2, val: '84.5°C' },
+    { id: 'R2', label: 'R2: Water Intake', x: -8, z: 8, val: '+3.8°C' },
+    { id: 'R1', label: 'R1: Fuel Storage', x: -6, z: -4, val: '-12.4°C' },
+    { id: 'R4', label: 'R4: CHP Generator', x: 4, z: -8, val: '280 kW' },
+    { id: 'R5', label: 'R5: VSAT Satellite', x: 8, z: -2, val: '1.24 Gbps' },
+    { id: 'R6', label: 'R6: Ice Sheet Margin', x: 18, z: -14, val: '1.85 m' },
   ];
 
   if (!isVisible) return null;
 
   return (
-    <group position={[0, 0.35, 0]}>
-      {/* Risk Heat Map Gradient Ground Plane (Lifted with depthWrite=false & polygonOffset to fix shaking) */}
+    <group position={[0, 0.08, 0]}>
+      {/* Risk Heat Map Gradient Ground Plane (Lifted with depthWrite=false & polygonOffset to prevent shaking) */}
       <mesh ref={meshRef} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[60, 50]} />
         <meshBasicMaterial
           map={riskHeatmapTexture}
           transparent
-          opacity={0.92}
+          opacity={0.88}
           side={THREE.DoubleSide}
           polygonOffset
-          polygonOffsetFactor={-4}
-          polygonOffsetUnits={-4}
+          polygonOffsetFactor={-10}
+          polygonOffsetUnits={-10}
           depthWrite={false}
         />
       </mesh>
 
-      {/* Axis Labels on Ground Plane (Impact vs Activity) */}
-      <Html position={[-30, 0.4, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} center>
-        <div className="text-white font-mono text-xs font-bold bg-slate-900/95 px-3 py-1 rounded border border-slate-700 shadow-2xl tracking-widest uppercase backdrop-blur-md">
-          ▲ IMPACT (Y-AXIS)
-        </div>
-      </Html>
-      <Html position={[0, 0.4, 26]} center>
-        <div className="text-white font-mono text-xs font-bold bg-slate-900/95 px-3 py-1 rounded border border-slate-700 shadow-2xl tracking-widest uppercase backdrop-blur-md">
-          ACTIVITY (X-AXIS) ►
-        </div>
-      </Html>
-
-      {/* Blue Data Points & Labels (R1, R2, R3...) Plotted on Ground */}
+      {/* Blue Sensor Node Markers Plotted directly on 3D Ground Mesh */}
       {riskNodes.map((node) => (
-        <group key={node.id} position={[node.x, 0.45, node.z]}>
-          {/* Blue Circular Dot */}
+        <group key={node.id} position={[node.x, 0.09, node.z]}>
+          {/* Outer Ring & Blue Fill */}
           <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.7, 32]} />
-            <meshBasicMaterial color="#2563eb" polygonOffset polygonOffsetFactor={-6} polygonOffsetUnits={-6} />
+            <meshBasicMaterial color="#2563eb" polygonOffset polygonOffsetFactor={-12} polygonOffsetUnits={-12} depthWrite={false} />
           </mesh>
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
             <ringGeometry args={[0.7, 0.9, 32]} />
-            <meshBasicMaterial color="#ffffff" polygonOffset polygonOffsetFactor={-7} polygonOffsetUnits={-7} />
+            <meshBasicMaterial color="#ffffff" polygonOffset polygonOffsetFactor={-13} polygonOffsetUnits={-13} depthWrite={false} />
           </mesh>
-
-          {/* HTML Label pinned to the node */}
-          <Html position={[1.2, 0.3, 0]} center>
-            <div className="bg-slate-900/95 text-white font-mono text-[11px] font-bold px-2 py-0.5 rounded border border-blue-500 shadow-xl whitespace-nowrap flex items-center gap-1.5 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-              {node.label}
-            </div>
-          </Html>
         </group>
       ))}
     </group>

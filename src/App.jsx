@@ -173,9 +173,7 @@ function MainAppContent() {
       </div>
 
       {/* Global Minimalist Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/90 py-4 px-6 text-center text-xs font-mono text-slate-500">
-        Glaciera Antarctic Station Telemetry & Digital Twin System | Developed for SIH26060 | NCPOR MoES Government of India
-      </footer>
+    
     </div>
   );
 }
