@@ -1,87 +1,608 @@
-import React from 'react';
+import React, { useState } from 'react';
 import heroImg from '../assets/hero.jpg';
 import { useTelemetry } from '../context/TelemetryContext';
-import { Thermometer, Wind, MapPin, ArrowUpRight } from 'lucide-react';
+import { 
+  Box, ShieldCheck, Zap, Radio, Thermometer, Wind, MapPin, 
+  ArrowRight, Layers, Cpu, Server, Activity, Database, Waves, 
+  Sparkles, CheckCircle2, RefreshCw, BarChart3, Globe, Compass, 
+  ChevronRight, ArrowRightLeft, Eye, Flame, ShieldAlert
+} from 'lucide-react';
 
-export function LandingHeroContent() {
-  const { telemetry } = useTelemetry();
+export function LandingHeroContent({ onNavigate }) {
+  const { telemetry, setActiveStation } = useTelemetry();
+  const [hoveredCard, setHoveredCard] = useState(null);
 
-  const temp = telemetry?.maitri?.atmospheric?.ambientTemp !== undefined 
+  const maitriTemp = telemetry?.maitri?.atmospheric?.ambientTemp !== undefined 
     ? `${Math.round(telemetry.maitri.atmospheric.ambientTemp)}°C` 
-    : '-32°C';
+    : '-24°C';
     
-  const windSpeed = telemetry?.bharati?.aws?.windSpeedKmh !== undefined 
-    ? `${Math.round(telemetry.bharati.aws.windSpeedKmh / 3.6)}m/s` 
-    : '18m/s';
+  const bharatiWind = telemetry?.bharati?.aws?.windSpeedKmh !== undefined 
+    ? `${Math.round(telemetry.bharati.aws.windSpeedKmh / 3.6)} m/s` 
+    : '18 m/s';
+
+  const handleLaunchStation = (stationKey) => {
+    setActiveStation(stationKey);
+    if (onNavigate) {
+      onNavigate(stationKey);
+    }
+  };
 
   return (
-    <div className="relative min-h-[calc(100vh-65px)] w-full flex flex-col justify-between overflow-hidden bg-slate-950 font-sans text-slate-100 select-none">
-      {/* Background Image with Dark Vignette/Gradients */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroImg}
-          alt="Glaciera Antarctic Station Hero"
-          className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
-        />
-        {/* Ambient Overlay Gradients matching design */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/30 to-slate-950/90" />
-        <div className="absolute inset-0 bg-radial-vignette opacity-60" />
-      </div>
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans select-none overflow-x-hidden">
+      
+      {/* ------------------------------------------------------------------ */}
+      {/* 1. HERO SECTION WITH IMAGE OVERLAY & DYNAMIC GRADIENTS             */}
+      {/* ------------------------------------------------------------------ */}
+      <section className="relative min-h-[85vh] flex flex-col justify-between overflow-hidden border-b border-slate-800/80">
+        
+        {/* Background Image with Dark Vignette & Animated Radial Glowing Accents */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroImg}
+            alt="Glaciera Antarctic Station Hero"
+            className="w-full h-full object-cover object-center scale-105 transform hover:scale-100 transition-transform duration-1000 ease-out opacity-65"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-slate-950" />
+          <div className="absolute inset-0 bg-radial-vignette opacity-70" />
+          
+          {/* Animated Background Glowing Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl animate-pulse pointer-events-none" />
+          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
+        </div>
 
-      {/* Main Hero Typography */}
-      <main className="relative z-10 w-full max-w-4xl mx-auto px-6 py-20 flex flex-col items-center justify-center text-center my-auto">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-4 drop-shadow-md">
-          Monitor the Extreme.
-        </h1>
-        <p className="text-slate-200/90 text-base sm:text-lg md:text-xl font-normal max-w-2xl leading-relaxed drop-shadow">
-          Real-time intelligence to remote the research
-          <br className="hidden sm:inline" />
-          monitoring station in its environments.
-        </p>
-      </main>
-
-      {/* Bottom Telemetry Bar Overlay */}
-      <footer className="relative z-20 w-full max-w-7xl mx-auto px-6 pb-8 pt-4">
-        <div className="flex flex-col gap-2">
-          <span className="text-xs text-slate-300/80 font-medium tracking-wide font-mono uppercase">
-            Glaciera Telemetry Live Stream
-          </span>
-
-          <div className="flex flex-wrap items-center gap-6 sm:gap-10">
-            {/* Coordinate Metric */}
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-cyan-400 shrink-0" />
-              <span className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white">
-                78°13'S
-              </span>
-            </div>
-
-            {/* Temperature Metric */}
-            <div className="flex items-center gap-2">
-              <Thermometer className="w-5 h-5 text-cyan-400 shrink-0" />
-              <span className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white">
-                {temp}
-              </span>
-            </div>
-
-            {/* Wind Speed Metric */}
-            <div className="flex items-center gap-2">
-              <Wind className="w-5 h-5 text-cyan-400 shrink-0" />
-              <span className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white">
-                {windSpeed}
-              </span>
-            </div>
-
-            {/* Distance / Elevation Metric */}
-            <div className="flex items-center gap-2">
-              <ArrowUpRight className="w-5 h-5 text-cyan-400 shrink-0" />
-              <span className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white">
-                4.2km
-              </span>
-            </div>
+        {/* Hero Top Live Status Ticker */}
+        <div className="relative z-10 max-w-[1700px] w-full mx-auto px-6 pt-6 flex flex-wrap items-center justify-end gap-4">
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-300 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-800">
+            <span className="flex items-center gap-1.5 text-emerald-400">
+              <Activity className="w-3.5 h-3.5" /> SATCOM Link: OPTIMAL
+            </span>
+            <span className="text-slate-600">|</span>
+            <span className="flex items-center gap-1.5 text-cyan-300">
+              <Zap className="w-3.5 h-3.5" /> Edge Gateway: ACTIVE
+            </span>
+            <span className="text-slate-600">|</span>
+            <span className="flex items-center gap-1.5 text-amber-300">
+              <Globe className="w-3.5 h-3.5" /> Dual Station Telemetry
+            </span>
           </div>
         </div>
+
+        {/* Main Hero Central Typography & Launch CTAs */}
+        <main className="relative z-10 max-w-5xl mx-auto px-6 py-16 flex flex-col items-center justify-center text-center my-auto space-y-6">
+          
+          <div className="space-y-4">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-sans leading-tight">
+              Monitor the Extreme.{' '}
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
+                Antarctic Operations Redefined.
+              </span>
+            </h1>
+
+            <p className="text-slate-300 text-base sm:text-xl font-normal max-w-3xl mx-auto leading-relaxed drop-shadow font-sans">
+              Next-generation 3D WebGL Digital Twin & Real-time Telemetry Platform for India's polar research stations — <strong className="text-cyan-300 font-semibold">Bharati (Larsemann Hills)</strong> and <strong className="text-amber-300 font-semibold">Maitri (Schirmacher Oasis)</strong>.
+            </p>
+          </div>
+
+          {/* Interactive Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <button
+              onClick={() => handleLaunchStation('bharati')}
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-sans font-bold text-sm shadow-xl shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+            >
+              <Box className="w-5 h-5 text-cyan-200" />
+              <span>Launch Bharati 3D Twin</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </button>
+
+            <button
+              onClick={() => handleLaunchStation('maitri')}
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-sans font-bold text-sm shadow-xl shadow-amber-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+            >
+              <Box className="w-5 h-5 text-amber-200" />
+              <span>Launch Maitri 3D Twin</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </button>
+
+            <a
+              href="#features-section"
+              className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-sans font-semibold text-sm transition-all backdrop-blur-md"
+            >
+              <Compass className="w-4 h-4 text-slate-400" />
+              <span>Explore Platform Features</span>
+            </a>
+          </div>
+
+        </main>
+
+        {/* Hero Telemetry Live Stream Bar Overlay */}
+        <footer className="relative z-20 w-full max-w-[1700px] mx-auto px-6 pb-8 pt-4">
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-slate-300 font-bold tracking-wide font-mono uppercase">
+                Glaciera Telemetry Live Stream
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 font-mono">
+              <div className="flex items-center gap-2.5">
+                <MapPin className="w-5 h-5 text-cyan-400 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">Coordinates</span>
+                  <span className="text-base sm:text-lg font-bold text-white">69°24'S, 76°11'E</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Thermometer className="w-5 h-5 text-amber-400 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">Maitri Ambient</span>
+                  <span className="text-base sm:text-lg font-bold text-white">{maitriTemp}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Wind className="w-5 h-5 text-blue-400 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">Bharati Wind</span>
+                  <span className="text-base sm:text-lg font-bold text-white">{bharatiWind}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Radio className="w-5 h-5 text-emerald-400 shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">ISRO Downlink</span>
+                  <span className="text-base sm:text-lg font-bold text-white">1.24 Gbps</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </footer>
+
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 2. DUAL STATION QUICK SELECT CARDS SHOWCASE                        */}
+      {/* ------------------------------------------------------------------ */}
+      <section className="py-16 px-6 max-w-[1700px] mx-auto space-y-8">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-2">
+          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40 uppercase tracking-widest">
+            Dual Antarctic Research Hubs
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight">
+            Integrated Station Digital Twins
+          </h2>
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Monitor real-time structural health, CHP cogeneration microgrids, space weather absorption, and logistics across India's two active Antarctic stations.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Bharati Station Card */}
+          <div 
+            onClick={() => handleLaunchStation('bharati')}
+            className="group relative bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-cyan-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-2xl shadow-2xl hover:border-cyan-400 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
+          >
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all pointer-events-none" />
+
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-cyan-950/80 border border-cyan-500/50 text-cyan-400 shadow-lg">
+                  <Box className="w-7 h-7" />
+                </div>
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40">
+                  ONLINE | 3D TWIN LIVE
+                </span>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-cyan-300 transition-colors">
+                    Bharati Research Station
+                  </h3>
+                  <span className="text-xs font-mono text-cyan-400">Est. 2012</span>
+                </div>
+                <p className="text-xs text-slate-400 font-mono mt-1">
+                  Larsemann Hills, Prydz Bay, East Antarctica | 69°24'S, 76°11'E
+                </p>
+              </div>
+
+              <p className="text-sm text-slate-300 leading-relaxed font-sans">
+                Features a stilt-supported 3-level aerodynamic superstructure crafted from 134 shipping containers. Equipped with 3 x Volvo Penta 280kW CHP microgrid generators, reverse osmosis desalination, and an ISRO Earth Observation Ground Station radome.
+              </p>
+
+              {/* Station Quick Metrics */}
+              <div className="grid grid-cols-3 gap-3 pt-2 font-mono">
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">Elevation</span>
+                  <span className="text-sm font-bold text-white">35 Meters</span>
+                </div>
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">Max Occupancy</span>
+                  <span className="text-sm font-bold text-cyan-300">47 Personnel</span>
+                </div>
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">ISRO Downlink</span>
+                  <span className="text-sm font-bold text-emerald-300">1.24 Gbps</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 flex items-center justify-between border-t border-slate-800/80 mt-6">
+              <span className="text-xs font-mono text-cyan-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+                Launch 3D WebGL Digital Twin &rarr;
+              </span>
+              <div className="p-2 rounded-xl bg-cyan-600 text-white group-hover:bg-cyan-500 transition-colors shadow-lg shadow-cyan-600/30">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* Maitri Station Card */}
+          <div 
+            onClick={() => handleLaunchStation('maitri')}
+            className="group relative bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-amber-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-2xl shadow-2xl hover:border-amber-400 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
+          >
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-all pointer-events-none" />
+
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-amber-950/80 border border-amber-500/50 text-amber-400 shadow-lg">
+                  <Box className="w-7 h-7" />
+                </div>
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/40">
+                  ONLINE | NEXT-GEN TWIN LIVE
+                </span>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-amber-300 transition-colors">
+                    Maitri Research Station
+                  </h3>
+                  <span className="text-xs font-mono text-amber-400">Est. 1989</span>
+                </div>
+                <p className="text-xs text-slate-400 font-mono mt-1">
+                  Schirmacher Oasis, Queen Maud Land, East Antarctica | 70°45'S, 11°44'E
+                </p>
+              </div>
+
+              <p className="text-sm text-slate-300 leading-relaxed font-sans">
+                Next-Gen aerodynamic dual-tier module architecture built over rocky Oasis permafrost. Connected to Lake Priyadarshini sub-ice freshwater intake, high-strength V-truss stilts, dual wind turbine spine, and cosmic noise riometer array.
+              </p>
+
+              {/* Station Quick Metrics */}
+              <div className="grid grid-cols-3 gap-3 pt-2 font-mono">
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">Elevation</span>
+                  <span className="text-sm font-bold text-white">117 Meters</span>
+                </div>
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">Water Source</span>
+                  <span className="text-sm font-bold text-amber-300">Priyadarshini Lake</span>
+                </div>
+                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+                  <span className="text-[10px] text-slate-400 uppercase block">Space Weather</span>
+                  <span className="text-sm font-bold text-emerald-300">1.84 dB Riometer</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 flex items-center justify-between border-t border-slate-800/80 mt-6">
+              <span className="text-xs font-mono text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+                Launch 3D WebGL Digital Twin &rarr;
+              </span>
+              <div className="p-2 rounded-xl bg-amber-600 text-white group-hover:bg-amber-500 transition-colors shadow-lg shadow-amber-600/30">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 3. CORE SYSTEM FEATURES GRID SECTION (#features-section)           */}
+      {/* ------------------------------------------------------------------ */}
+      <section id="features-section" className="py-16 px-6 max-w-[1700px] mx-auto space-y-12">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40 uppercase tracking-widest">
+            Core Platform Capabilities
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-sans tracking-tight">
+            Engineered for Polar Survivability
+          </h2>
+          <p className="text-slate-400 text-base leading-relaxed font-sans">
+            A comprehensive suite of remote operations, predictive telemetry, low-bandwidth satellite synchronization, and 3D digital twin monitoring designed for severe sub-zero environments.
+          </p>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          {/* Feature 1 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(1)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-cyan-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Box className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+              3D WebGL Digital Twin Engine
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              Interactive 3D structural canvas rendering full CAD-grade station geometry, cutaway floor inspections, thermal heatmap overlays, and mesh click telemetry diagnostics.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                Level-by-Level Cutaway Floor Inspector
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                Live Ground Thermal Heatmap Layers
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                Blizzard Particle Physics Simulation
+              </li>
+            </ul>
+          </div>
+
+          {/* Feature 2 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(2)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-teal-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-teal-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-teal-950/80 border border-teal-500/40 text-teal-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Cpu className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-teal-300 transition-colors">
+              Edge Gateway & Compression
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              On-station Linux edge daemon compressing raw sensor streams using Google Protocol Buffers (Protobuf) to minimize expensive satellite throughput.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                82.4% Protobuf Payload Compression Ratio
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                Local Memory Queue During Polar Blackout
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                Automatic Resuming Store-and-Forward
+              </li>
+            </ul>
+          </div>
+
+          {/* Feature 3 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(3)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-amber-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Zap className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+              Microgrid & Energy Telemetry
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              Combined Heat & Power (CHP) cogeneration monitoring, diesel generator fuel burn rate analytics, solar PV arrays, and automated smart load shedding.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                CHP Thermal Exhaust Hydronic Recovery
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                Projected Fuel Runtime Days Counter
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                Remote Load Shedding Breaker Control
+              </li>
+            </ul>
+          </div>
+
+          {/* Feature 4 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(4)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-blue-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-blue-950/80 border border-blue-500/40 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Radio className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+              ISRO SATCOM Ground Station
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              Hilltop geodesic radome telemetry downlinking Cartosat-3 and Oceansat-2 earth observation satellite passes directly to NRSC Shadnagar and NCPOR Goa.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                Automatic De-Icing Thermal Shroud
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                Dual-Axis Azimuth & Elevation Tracking
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                1.24 Gbps Direct Pass Downlink
+              </li>
+            </ul>
+          </div>
+
+          {/* Feature 5 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(5)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-emerald-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Database className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+              Logistics & Life Support
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              Tracking ISO shipping container pods, emergency medical trauma supplies, freeze-dried rations, and MV Vasiliy Golovnin expedition ship resupply ETA.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                Reverse Osmosis Desalination Tracking
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                Madrid Protocol Effluent Zero-Discharge
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                Expedition Ship Cargo & ETA Countdown
+              </li>
+            </ul>
+          </div>
+
+          {/* Feature 6 */}
+          <div 
+            onMouseEnter={() => setHoveredCard(6)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-slate-900/60 border border-slate-800 hover:border-purple-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-purple-500/10 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Activity className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+              Space Weather & Riometer
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              Ionospheric cosmic noise absorption monitoring (dB), solar flare degradation alert system, and geomagnetic field vector visualization.
+            </p>
+            <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                Cosmic Noise Absorption (38.2 MHz)
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                Solar Particle Flux Anomaly Trigger
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                Automated Fallback to Local Edge Queue
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 4. SYSTEM ARCHITECTURE 5-LAYER STACK DIAGRAM                       */}
+      {/* ------------------------------------------------------------------ */}
+      <section className="py-16 px-6 max-w-[1700px] mx-auto">
+        <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-2xl space-y-8">
+          
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+            <div>
+              <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block">
+                End-to-End System Pipeline
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-sans mt-1">
+                Glaciera 5-Layer Operational Architecture
+              </h2>
+            </div>
+            <p className="text-xs text-slate-400 font-mono max-w-md">
+              From polar in-situ sensors through Protobuf edge encryption and VSAT satellite transport to the WebGL 3D Twin.
+            </p>
+          </div>
+
+          {/* Visual Architecture Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+            
+            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase">LAYER 1</span>
+              <div>
+                <h4 className="text-sm font-bold text-white font-sans">In-Situ Datasets</h4>
+                <p className="text-xs text-slate-400 mt-1 font-sans">AWS Weather, CHP Sensors, Sonar Ice, Riometer</p>
+              </div>
+              <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-1 rounded w-fit border border-cyan-500/30">
+                100 Hz Raw Sampling
+              </span>
+            </div>
+
+            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-bold text-teal-400 uppercase">LAYER 2</span>
+              <div>
+                <h4 className="text-sm font-bold text-white font-sans">Edge Gateway</h4>
+                <p className="text-xs text-slate-400 mt-1 font-sans">Protobuf Binary Serialization & Ring Buffer</p>
+              </div>
+              <span className="text-[10px] font-mono text-teal-300 bg-teal-950/80 px-2 py-1 rounded w-fit border border-teal-500/30">
+                82% Size Reduction
+              </span>
+            </div>
+
+            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-bold text-blue-400 uppercase">LAYER 3</span>
+              <div>
+                <h4 className="text-sm font-bold text-white font-sans">SATCOM Transport</h4>
+                <p className="text-xs text-slate-400 mt-1 font-sans">Store-and-Forward VSAT Link to Ground Station</p>
+              </div>
+              <span className="text-[10px] font-mono text-blue-300 bg-blue-950/80 px-2 py-1 rounded w-fit border border-blue-500/30">
+                1.24 Gbps ISRO Downlink
+              </span>
+            </div>
+
+            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-bold text-purple-400 uppercase">LAYER 4</span>
+              <div>
+                <h4 className="text-sm font-bold text-white font-sans">Cloud Ingestion</h4>
+                <p className="text-xs text-slate-400 mt-1 font-sans">NCPOR Central Gateway & WebSocket Server</p>
+              </div>
+              <span className="text-[10px] font-mono text-purple-300 bg-purple-950/80 px-2 py-1 rounded w-fit border border-purple-500/30">
+                Real-Time Broadcast
+              </span>
+            </div>
+
+            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">LAYER 5</span>
+              <div>
+                <h4 className="text-sm font-bold text-white font-sans">3D Digital Twin</h4>
+                <p className="text-xs text-slate-400 mt-1 font-sans">WebGL Viewport, Cutaway & Mission Control</p>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/80 px-2 py-1 rounded w-fit border border-emerald-500/30">
+                Interactive Telemetry
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Footer Disclaimer */}
+      <footer className="py-8 border-t border-slate-900 text-center text-xs text-slate-500 font-mono">
+        <p>Glaciera | Indian Antarctic Remote Operations Platform | NCPOR / MoES India</p>
       </footer>
+
     </div>
   );
 }

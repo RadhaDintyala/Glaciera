@@ -135,6 +135,13 @@ export function MaitriModel({ telemetry, isCutaway, isHeatmapActive, isFaultActi
           <meshStandardMaterial color="#16a34a" /> {/* Green */}
         </mesh>
 
+        {/* 3D Label: Block A */}
+        <Html position={[0, 2.4, 2.45]} center>
+          <div className="bg-slate-950/90 text-amber-300 font-mono text-[11px] font-bold px-3 py-1 rounded-md border border-amber-500/50 shadow-xl pointer-events-none whitespace-nowrap">
+            MAITRI STATION — BLOCK A: LIVING CABINS & COMMAND
+          </div>
+        </Html>
+
         {/* Internal Modular Shipping Containers (Visible when Cutaway Mode is ON) */}
         {isCutaway && (
           <group position={[0, 0, 0]}>
@@ -168,6 +175,13 @@ export function MaitriModel({ telemetry, isCutaway, isHeatmapActive, isFaultActi
             wireframe={isCutaway}
           />
         </mesh>
+
+        {/* 3D Label: Block B */}
+        <Html position={[0, 2.6, 2.65]} center>
+          <div className="bg-slate-950/90 text-cyan-300 font-mono text-[11px] font-bold px-3 py-1 rounded-md border border-cyan-500/50 shadow-xl pointer-events-none whitespace-nowrap">
+            BLOCK B: 18 SCIENCE LABS & WORKSTATIONS
+          </div>
+        </Html>
 
         {/* Panoramic Observation Bay Glass Window (Front Science Lounge) */}
         <mesh position={[-10.95, 0, 0]}>
@@ -229,6 +243,13 @@ export function MaitriModel({ telemetry, isCutaway, isHeatmapActive, isFaultActi
           <boxGeometry args={[0.05, 1.6, 3.8]} />
           <meshPhysicalMaterial color="#38bdf8" transmission={0.7} opacity={0.8} transparent />
         </mesh>
+
+        {/* 3D Label: Skywalk */}
+        <Html position={[0, 1.8, 0]} center>
+          <div className="bg-slate-900/90 text-slate-200 font-mono text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-700 pointer-events-none whitespace-nowrap shadow-md">
+            Glazed Interconnecting Skywalk
+          </div>
+        </Html>
       </group>
 
       {/* ------------------------------------------------------------------ */}
@@ -245,6 +266,14 @@ export function MaitriModel({ telemetry, isCutaway, isHeatmapActive, isFaultActi
             emissiveIntensity={isFaultActive ? 0.9 : 0.2}
           />
         </mesh>
+
+        {/* 3D Label: Block C */}
+        <Html position={[0, 4.8, 0]} center>
+          <div className="bg-slate-950/95 text-amber-300 font-mono text-[11px] font-bold px-3 py-1 rounded-md border border-amber-500/50 shadow-2xl pointer-events-none whitespace-nowrap flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            Block C: Cummins CHP Gensets & Wind Turbine Spine
+          </div>
+        </Html>
 
         {/* Generator Twin Smoke Stacks */}
         <mesh position={[1.5, 2.4, 1.5]} castShadow>
@@ -311,21 +340,61 @@ export function MaitriModel({ telemetry, isCutaway, isHeatmapActive, isFaultActi
           <meshPhysicalMaterial color="#0284c7" roughness={0.1} transmission={0.6} opacity={0.9} transparent />
         </mesh>
         <Html position={[0, 0.8, 0]} center>
-          <div className="bg-cyan-950/90 text-cyan-300 text-[10px] font-mono px-2 py-0.5 rounded border border-cyan-500/40 whitespace-nowrap shadow-lg">
-            Lake Priyadarshini Basin (Trace Heated Intake)
+          <div className="bg-cyan-950/95 text-cyan-300 text-[10px] font-mono font-bold px-2.5 py-1 rounded-md border border-cyan-500/40 whitespace-nowrap shadow-lg flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            Lake Priyadarshini (Freshwater Intake & Pump House)
+          </div>
+        </Html>
+      </group>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 7. SCHIRMACHER OASIS LOGISTICS & CONTAINER DEPOT                   */}
+      {/* ------------------------------------------------------------------ */}
+      <group position={[0, 0, 0]}>
+        {/* Colorful Container Pods */}
+        <mesh position={[-12, 0.6, -10]} rotation={[0, 0.3, 0]} castShadow receiveShadow>
+          <boxGeometry args={[4.2, 1.5, 1.8]} />
+          <meshStandardMaterial color="#ea580c" roughness={0.4} metalness={0.5} />
+        </mesh>
+        <mesh position={[-12, 2.1, -10]} rotation={[0, 0.3, 0]} castShadow receiveShadow>
+          <boxGeometry args={[4.2, 1.5, 1.8]} />
+          <meshStandardMaterial color="#ea580c" roughness={0.4} metalness={0.5} />
+        </mesh>
+        <mesh position={[8, 0.6, 12]} rotation={[0, -0.2, 0]} castShadow receiveShadow>
+          <boxGeometry args={[4.2, 1.5, 1.8]} />
+          <meshStandardMaterial color="#0284c7" roughness={0.4} metalness={0.5} />
+        </mesh>
+        <mesh position={[12, 0.6, 11]} rotation={[0, -0.4, 0]} castShadow receiveShadow>
+          <boxGeometry args={[4.2, 1.5, 1.8]} />
+          <meshStandardMaterial color="#16a34a" roughness={0.4} metalness={0.5} />
+        </mesh>
+        <mesh position={[-6, 0.6, 12]} rotation={[0, 0.1, 0]} castShadow receiveShadow>
+          <boxGeometry args={[4.2, 1.5, 1.8]} />
+          <meshStandardMaterial color="#dc2626" roughness={0.4} metalness={0.5} />
+        </mesh>
+        <Html position={[10, 2.4, 12]} center>
+          <div className="bg-slate-900/90 text-amber-300 font-mono text-[10px] font-semibold px-2 py-0.5 rounded border border-amber-500/30 whitespace-nowrap shadow-md">
+            Maitri Logistics & Container Depot
           </div>
         </Html>
       </group>
 
       {/* Heated Water & Microgrid Power Conduits Running Under Stilts */}
-      <mesh position={[-3, 1.1, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.12, 0.12, 28, 16]} />
-        <meshStandardMaterial
-          color={isFaultActive ? '#ef4444' : isPowerConduitActive ? '#38bdf8' : '#475569'}
-          emissive={isFaultActive ? '#ef4444' : isPowerConduitActive ? '#0284c7' : '#000000'}
-          emissiveIntensity={isPowerConduitActive ? 1.5 : 0}
-        />
-      </mesh>
+      <group position={[0, 0, 0]}>
+        <mesh position={[-3, 1.1, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.12, 0.12, 28, 16]} />
+          <meshStandardMaterial
+            color={isFaultActive ? '#ef4444' : isPowerConduitActive ? '#38bdf8' : '#475569'}
+            emissive={isFaultActive ? '#ef4444' : isPowerConduitActive ? '#0284c7' : '#000000'}
+            emissiveIntensity={isPowerConduitActive ? 1.5 : 0}
+          />
+        </mesh>
+        <Html position={[-3, 2.0, 0]} center>
+          <div className="bg-slate-950/90 text-teal-300 font-mono text-[10px] font-semibold px-2 py-0.5 rounded border border-teal-500/40 whitespace-nowrap shadow-md">
+            Trace-Heated Microgrid & Hydronic Conduit Line
+          </div>
+        </Html>
+      </group>
     </group>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TelemetryProvider } from './context/TelemetryContext';
+import { TelemetryProvider, useTelemetry } from './context/TelemetryContext';
 import { Navbar } from './components/Navbar';
 import { LandingHeroContent } from './components/LandingPage';
 import { BharatiStationView } from './components/BharatiStationView';
@@ -8,6 +8,7 @@ import { EnergyMicrogridView } from './components/Module2_Energy/EnergyMicrogrid
 import { InventoryLogisticsView } from './components/Module3_Logistics/InventoryLogisticsView';
 import { LowBandwidthPredictiveView } from './components/Module4_Maintenance/LowBandwidthPredictiveView';
 import { InSituDatasetsBar } from './components/Layer1_InSituDatasets/InSituDatasetsBar';
+import { InSituStreamsView } from './components/Layer1_InSituDatasets/InSituStreamsView';
 import { EdgeGatewayPanel } from './components/Layer2_EdgeGateway/EdgeGatewayPanel';
 import { SatcomControlPanel } from './components/Layer3_SatcomNetwork/SatcomControlPanel';
 import { CloudGatewayPanel } from './components/Layer4_CloudGateway/CloudGatewayPanel';
@@ -158,19 +159,34 @@ function FullConsoleView() {
 }
 
 function MainAppContent() {
+  const { activeStation, setActiveStation } = useTelemetry();
   const [activePage, setActivePage] = useState('overview'); // 'overview' | 'bharati' | 'maitri' | 'energy' | 'logistics' | 'maintenance' | 'monitoring' | 'data' | 'console'
+
+  const handleStationSwitch = (stationKey) => {
+    setActiveStation(stationKey);
+    setActivePage(stationKey);
+  };
+
+  const handleNavigate = (pageId) => {
+    if (pageId === 'bharati' || pageId === 'maitri') {
+      handleStationSwitch(pageId);
+    } else {
+      setActivePage(pageId);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       {/* Global Unified Minimalist Navbar visible on EVERY page */}
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
+      <Navbar activePage={activePage} setActivePage={handleNavigate} />
 
       {/* Page Routing Container */}
       <div className="flex-1 w-full">
-        {activePage === 'overview' && <LandingHeroContent />}
-        {(activePage === '3d-twin' || activePage === 'bharati') && <BharatiStationView />}
+        {activePage === 'overview' && <LandingHeroContent onNavigate={handleNavigate} />}
+        {(activePage === '3d-twin' || activePage === 'bharati') && <BharatiStationView onSwitchStation={handleStationSwitch} />}
+        {activePage === 'maitri' && <MaitriStationView onSwitchStation={handleStationSwitch} />}
         {activePage === 'logistics' && <InventoryLogisticsView />}
-        {(activePage === 'insitu' || activePage === 'data') && <DataPage />}
+        {(activePage === 'insitu' || activePage === 'data') && <InSituStreamsView />}
       </div>
     </div>
   );

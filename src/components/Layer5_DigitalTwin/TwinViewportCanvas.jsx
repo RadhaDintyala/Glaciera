@@ -80,9 +80,15 @@ export function TwinViewportCanvas() {
 
   // Selected Area & Model Source State
   const [activeAreaKey, setActiveAreaKey] = useState('level2');
-  const [modelSource, setModelSource] = useState('bharati'); // 'bharati' | 'glb' | 'maitri'
+  const [modelSource, setModelSource] = useState(activeStation || 'bharati'); // 'bharati' | 'glb' | 'maitri'
   const [selectedMeshObject, setSelectedMeshObject] = useState(null);
   const [hoveredMeshObject, setHoveredMeshObject] = useState(null);
+
+  React.useEffect(() => {
+    if (activeStation === 'bharati' || activeStation === 'maitri') {
+      setModelSource(activeStation);
+    }
+  }, [activeStation]);
 
   const riometerDb = telemetry?.maitri?.riometer?.absorptionDb || 1.84;
   const windSpeedKmh = telemetry?.bharati?.aws?.windSpeedKmh || 63.3;

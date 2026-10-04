@@ -16,6 +16,18 @@ export function InventoryLogisticsView() {
   const resupply = telemetry.expeditionResupply || {};
 
   const [activeSubTab, setActiveSubTab] = useState('rations'); // 'rations' | 'medical' | 'scientific' | 'spares'
+  const [manifestStatus, setManifestStatus] = useState('idle'); // 'idle' | 'submitting' | 'success'
+
+  const handleSubmitManifest = () => {
+    setManifestStatus('submitting');
+    triggerEdgeAction('SUBMIT_RESUPPLY_ORDER', `Priority ration and spare parts manifest submitted to ${stationData.stationName}`);
+    setTimeout(() => {
+      setManifestStatus('success');
+      setTimeout(() => {
+        setManifestStatus('idle');
+      }, 4500);
+    }, 600);
+  };
 
   return (
     <div className="max-w-[1700px] mx-auto p-4 sm:p-6 space-y-6 animate-fade-in font-sans bg-slate-50 min-h-screen text-slate-800">
@@ -350,14 +362,39 @@ export function InventoryLogisticsView() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
               <span className="text-xs font-sans text-slate-900 font-bold">Pending Priority Orders</span>
               <button
-                onClick={() => triggerEdgeAction('SUBMIT_RESUPPLY_ORDER', 'Priority ration and spare parts manifest submitted to NCPOR Goa Logistics Portal')}
-                className="px-3.5 py-1.5 bg-[#0284c7] hover:bg-sky-700 text-white font-sans text-xs font-bold rounded-xl transition-all shadow-md shadow-sky-500/20"
+                onClick={handleSubmitManifest}
+                disabled={manifestStatus === 'submitting'}
+                className={`px-3.5 py-1.5 font-sans text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                  manifestStatus === 'success'
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
+                    : manifestStatus === 'submitting'
+                    ? 'bg-sky-400 text-white cursor-wait'
+                    : 'bg-[#0284c7] hover:bg-sky-700 text-white shadow-sky-500/20'
+                }`}
               >
-                Submit Replenishment Manifest
+                {manifestStatus === 'submitting' ? (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>Transmitting Manifest...</span>
+                  </>
+                ) : manifestStatus === 'success' ? (
+                  <>
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>Request sent successfully!</span>
+                  </>
+                ) : (
+                  <span>Submit Replenishment Manifest</span>
+                )}
               </button>
             </div>
             <p className="text-[11px] text-slate-600 font-sans">
-              8 priority replenishment orders queued for the next expedition vessel call at Larsemann Hills & Schirmacher Oasis.
+              {manifestStatus === 'success' ? (
+                <span className="text-emerald-700 font-medium font-sans">
+                  ✓ Priority replenishment manifest successfully dispatched to {stationData.stationName} expedition queue.
+                </span>
+              ) : (
+                '8 priority replenishment orders queued for the next expedition vessel call at Larsemann Hills & Schirmacher Oasis.'
+              )}
             </p>
           </div>
         </div>

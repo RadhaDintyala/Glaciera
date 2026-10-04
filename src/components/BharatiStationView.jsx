@@ -5,12 +5,14 @@ import { RiskHeatMap2DChart } from './RiskHeatMap2DChart';
 import { 
   Zap, Radio, Thermometer, ShieldCheck, Flame, Cpu, Waves, Wind, 
   Database, Gauge, RefreshCw, Layers, CheckCircle2, AlertTriangle, ChevronRight, Activity, Box,
-  MapPin, Sliders, Info, Sparkles, Building2, Truck, Server, RadioReceiver
+  MapPin, Sliders, Info, Sparkles, Building2, Truck, Server, RadioReceiver, ArrowRightLeft
 } from 'lucide-react';
 
-export function BharatiStationView() {
+export function BharatiStationView({ onSwitchStation }) {
   const { 
     telemetry, 
+    activeStation,
+    setActiveStation,
     isStormActive, 
     isGridFaultActive,
     isCutawayView,
@@ -21,6 +23,13 @@ export function BharatiStationView() {
 
   const [selectedLevel, setSelectedLevel] = useState('level2'); // 'level1' | 'level2' | 'level3' | 'radome' | 'site'
   const [activeSubsystem, setActiveSubsystem] = useState('chp'); // 'chp' | 'satcom' | 'coastal' | 'madrid'
+
+  const handleSwitchToMaitri = () => {
+    setActiveStation('maitri');
+    if (onSwitchStation) {
+      onSwitchStation('maitri');
+    }
+  };
 
   // Bharati live telemetry values
   const chpEfficiency = isGridFaultActive ? 68.4 : 94.2;
@@ -55,8 +64,8 @@ export function BharatiStationView() {
           </div>
         </div>
 
-        {/* Live Status Indicators */}
-        <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+        {/* Live Status Indicators & Switch to Maitri Button */}
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
           <div className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-2 shadow-inner">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-slate-300 font-semibold">BMS System: OPTIMAL</span>
@@ -65,6 +74,16 @@ export function BharatiStationView() {
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
             <span className="text-cyan-300 font-semibold">ISRO Downlink: {passThroughput}</span>
           </div>
+
+          {/* Prominent Switch to Maitri Button */}
+          <button
+            onClick={handleSwitchToMaitri}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-sans font-bold shadow-lg shadow-amber-500/25 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+            title="Switch View to Maitri Antarctic Station 3D Digital Twin"
+          >
+            <ArrowRightLeft className="w-4 h-4" />
+            <span>Switch to Maitri</span>
+          </button>
         </div>
       </div>
 
