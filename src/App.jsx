@@ -168,14 +168,9 @@ function MainAppContent() {
       {/* Page Routing Container */}
       <div className="flex-1 w-full">
         {activePage === 'overview' && <LandingHeroContent />}
-        {activePage === 'bharati' && <BharatiStationView />}
-        {activePage === 'maitri' && <MaitriStationView />}
-        {activePage === 'energy' && <EnergyMicrogridView />}
+        {(activePage === '3d-twin' || activePage === 'bharati') && <BharatiStationView />}
         {activePage === 'logistics' && <InventoryLogisticsView />}
-        {activePage === 'maintenance' && <LowBandwidthPredictiveView />}
-        {activePage === 'monitoring' && <MonitoringPage />}
-        {activePage === 'data' && <DataPage />}
-        {activePage === 'console' && <FullConsoleView />}
+        {(activePage === 'insitu' || activePage === 'data') && <DataPage />}
       </div>
     </div>
   );

@@ -146,34 +146,7 @@ export function TwinViewportCanvas() {
         triggerEdgeAction={triggerEdgeAction}
       />
 
-      {/* Model Selector Top Right */}
-      <div className="absolute top-3 right-4 z-20 flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-800 shadow-xl">
-        <span className="text-[10px] font-mono text-slate-400 px-2 font-semibold">3D Model:</span>
-        <button
-          onClick={() => handleStationOrModelChange('bharati')}
-          className={`px-3 py-1 rounded-lg text-[10px] font-mono font-bold transition-all ${
-            modelSource === 'bharati' ? 'bg-cyan-600 text-white shadow' : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          Bharati Station
-        </button>
-        <button
-          onClick={() => handleStationOrModelChange('maitri')}
-          className={`px-3 py-1 rounded-lg text-[10px] font-mono font-bold transition-all ${
-            modelSource === 'maitri' ? 'bg-cyan-600 text-white shadow' : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          Maitri II Station
-        </button>
-        <button
-          onClick={() => handleStationOrModelChange('glb')}
-          className={`px-3 py-1 rounded-lg text-[10px] font-mono font-bold transition-all ${
-            modelSource === 'glb' ? 'bg-cyan-600 text-white shadow' : 'text-slate-300 hover:text-white'
-          }`}
-        >
-          Native GLB Crew Quarters
-        </button>
-      </div>
+
 
       {/* Interactive Mesh Inspection HUD */}
       <ModelInspectorHUD
