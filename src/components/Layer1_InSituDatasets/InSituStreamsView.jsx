@@ -48,47 +48,47 @@ export function InSituStreamsView() {
   const driftRate = isBharati ? '1.82 mm/yr' : `${telemetry?.maitri?.gpsSurface?.driftX || 2.14} mm/yr`;
 
   return (
-    <div className="max-w-[1700px] mx-auto p-4 sm:p-6 space-y-6 animate-fade-in font-sans bg-slate-50 min-h-screen text-slate-800">
+    <div className="max-w-[1700px] mx-auto p-4 sm:p-6 space-y-6 animate-fade-in font-sans bg-[#0B0D11] min-h-screen text-[#F8FAFC]">
       
-      {/* Title Header Banner - Glossy Deep Teal / Ocean Gradient matching Logistics banner */}
-      <div className="bg-gradient-to-r from-teal-700 via-teal-600 to-cyan-700 border border-teal-500/40 rounded-3xl p-6 text-white shadow-xl shadow-teal-700/15 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 backdrop-blur-md">
+      {/* Title Header Banner */}
+      <div className="bg-[#12161D] border border-[#202632] rounded-2xl p-6 text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="p-3.5 rounded-2xl bg-white/20 backdrop-blur-md text-white border border-white/30 shadow-lg">
-            <Activity className="w-8 h-8" />
+          <div className="p-3 rounded-xl bg-[#181D26] text-sky-400 border border-[#202632]">
+            <Activity className="w-7 h-7" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-sans">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
                 In-Situ Datasets & Environmental Streams
               </h1>
-              <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-white/20 text-white border border-white/40 tracking-wider uppercase backdrop-blur-sm">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#181D26] text-slate-300 border border-[#202632] tracking-wider uppercase">
                 Live Sensor Telemetry
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-teal-100 font-sans mt-1 opacity-95">
+            <p className="text-xs sm:text-sm text-slate-400 font-sans mt-1">
               Raw Physical Sensors Stream, Atmospheric Weather, Microgrid & Space Weather Ingestion for {stationData.stationName}
             </p>
           </div>
         </div>
 
-        {/* Station Switcher (Exact style from reference image) */}
-        <div className="flex items-center bg-white/20 p-1.5 rounded-2xl border border-white/30 shrink-0 font-sans text-xs backdrop-blur-md shadow-inner">
+        {/* Station Switcher */}
+        <div className="flex items-center bg-[#0B0D11] p-1 rounded-xl border border-[#202632] shrink-0 font-sans text-xs">
           <button
             onClick={() => setActiveStation('bharati')}
-            className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               stationKey === 'bharati'
-                ? 'bg-white text-teal-800 shadow-md scale-105'
-                : 'text-white hover:bg-white/10'
+                ? 'bg-white text-neutral-950 shadow-sm'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             Bharati Station
           </button>
           <button
             onClick={() => setActiveStation('maitri')}
-            className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               stationKey === 'maitri'
-                ? 'bg-white text-teal-800 shadow-md scale-105'
-                : 'text-white hover:bg-white/10'
+                ? 'bg-white text-neutral-950 shadow-sm'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             Maitri Station
@@ -96,136 +96,132 @@ export function InSituStreamsView() {
         </div>
       </div>
 
-      {/* Top Level 4 Status Cards Row (Exact style from reference image) */}
+      {/* Top Level 4 Status Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* Card 1: Atmospheric Ambient Temperature */}
-        <div className="bg-white border border-teal-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-teal-100/60 to-transparent rounded-bl-full pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 text-xs mb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500">Atmospheric Temperature</span>
-            <div className="p-2 rounded-xl bg-teal-50 text-teal-600">
+        <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 relative overflow-hidden">
+          <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+            <span className="font-medium uppercase tracking-wider text-[11px] text-slate-400">Atmospheric Temperature</span>
+            <div className="p-1.5 rounded-lg bg-[#181D26] text-sky-400 border border-[#202632]">
               <Thermometer className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-slate-900 font-mono">
-            {ambientTemp} <span className="text-sm font-semibold text-teal-600">Outdoor</span>
+          <div className="text-3xl font-bold text-white font-mono tracking-tight">
+            {ambientTemp} <span className="text-sm font-medium text-slate-400">Outdoor</span>
           </div>
-          <div className="mt-3 w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-            <div className="bg-gradient-to-r from-teal-400 to-cyan-500 h-full rounded-full" style={{ width: '68%' }} />
+          <div className="mt-3 w-full bg-[#181D26] rounded-full h-2 overflow-hidden border border-[#202632]">
+            <div className="bg-sky-500 h-full rounded-full" style={{ width: '68%' }} />
           </div>
-          <span className="text-[11px] text-emerald-600 font-medium mt-2 flex items-center gap-1">
+          <span className="text-[11px] text-emerald-400 font-medium mt-2 flex items-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5" /> Sensor Status: OPTIMAL (AWS Calibrated)
           </span>
         </div>
 
         {/* Card 2: Surface Glacier Drift */}
-        <div className="bg-white border border-teal-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-100/50 to-transparent rounded-bl-full pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 text-xs mb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500">Permafrost & Glacier Drift</span>
-            <div className="p-2 rounded-xl bg-purple-50 text-purple-600">
+        <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 relative overflow-hidden">
+          <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+            <span className="font-medium uppercase tracking-wider text-[11px] text-slate-400">Permafrost & Glacier Drift</span>
+            <div className="p-1.5 rounded-lg bg-[#181D26] text-slate-400 border border-[#202632]">
               <Compass className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-slate-900 font-mono">
-            {driftRate} <span className="text-sm font-semibold text-purple-600">Displacement</span>
+          <div className="text-3xl font-bold text-white font-mono tracking-tight">
+            {driftRate} <span className="text-sm font-medium text-slate-400">Displacement</span>
           </div>
-          <div className="mt-3 w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-400 to-indigo-500 h-full rounded-full" style={{ width: '42%' }} />
+          <div className="mt-3 w-full bg-[#181D26] rounded-full h-2 overflow-hidden border border-[#202632]">
+            <div className="bg-sky-500 h-full rounded-full" style={{ width: '42%' }} />
           </div>
-          <span className="text-[11px] text-slate-500 font-medium mt-2 block">
+          <span className="text-[11px] text-slate-400 font-medium mt-2 block">
             Bedrock Anchor Tilt: 0.08° (STABLE)
           </span>
         </div>
 
         {/* Card 3: Microgrid Power Load */}
-        <div className="bg-white border border-teal-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-100/60 to-transparent rounded-bl-full pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 text-xs mb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500">Microgrid Power Load</span>
-            <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
+        <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 relative overflow-hidden">
+          <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+            <span className="font-medium uppercase tracking-wider text-[11px] text-slate-400">Microgrid Power Load</span>
+            <div className="p-1.5 rounded-lg bg-[#181D26] text-amber-400 border border-[#202632]">
               <Zap className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-amber-700 font-mono">
-            {totalLoad} <span className="text-sm font-semibold text-slate-500">Active Load</span>
+          <div className="text-3xl font-bold text-white font-mono tracking-tight">
+            {totalLoad} <span className="text-sm font-medium text-slate-400">Active Load</span>
           </div>
-          <div className="mt-3 w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-            <div className="bg-gradient-to-r from-amber-400 to-yellow-500 h-full rounded-full" style={{ width: '64%' }} />
+          <div className="mt-3 w-full bg-[#181D26] rounded-full h-2 overflow-hidden border border-[#202632]">
+            <div className="bg-amber-500 h-full rounded-full" style={{ width: '64%' }} />
           </div>
-          <span className="text-[11px] text-slate-500 font-medium mt-2 block">
+          <span className="text-[11px] text-slate-400 font-medium mt-2 block">
             Grid Frequency: 50.01 Hz | Phase A: 231 V
           </span>
         </div>
 
         {/* Card 4: Space Weather Riometer */}
-        <div className="bg-white border border-teal-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-100/60 to-transparent rounded-bl-full pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 text-xs mb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500">Ionospheric Riometer</span>
-            <div className="p-2 rounded-xl bg-cyan-50 text-cyan-600">
+        <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 relative overflow-hidden">
+          <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+            <span className="font-medium uppercase tracking-wider text-[11px] text-slate-400">Ionospheric Riometer</span>
+            <div className="p-1.5 rounded-lg bg-[#181D26] text-sky-400 border border-[#202632]">
               <Radio className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-extrabold text-cyan-700 font-mono">
-            {riometerDb} <span className="text-sm font-semibold text-slate-500">Absorption</span>
+          <div className="text-3xl font-bold text-sky-400 font-mono tracking-tight">
+            {riometerDb} <span className="text-sm font-medium text-slate-400">Absorption</span>
           </div>
-          <div className="mt-3 w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-            <div className="bg-gradient-to-r from-cyan-400 to-sky-500 h-full rounded-full" style={{ width: '35%' }} />
+          <div className="mt-3 w-full bg-[#181D26] rounded-full h-2 overflow-hidden border border-[#202632]">
+            <div className="bg-sky-500 h-full rounded-full" style={{ width: '35%' }} />
           </div>
-          <span className="text-[11px] text-slate-500 font-medium mt-2 block">
+          <span className="text-[11px] text-slate-400 font-medium mt-2 block">
             Cosmic Noise: QUIET (0.4 dB Loss)
           </span>
         </div>
 
       </div>
 
-      {/* Two-Column Section (Exact structure matching the attached image) */}
+      {/* Two-Column Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Column: 1. Live Raw Sensor Stream & In-Situ Parameters */}
-        <div className="lg:col-span-7 bg-white border border-teal-100 rounded-3xl p-6 shadow-sm space-y-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 gap-3">
+        <div className="lg:col-span-7 bg-[#12161D] border border-[#202632] rounded-2xl p-6 space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#202632] pb-4 gap-3">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-teal-50 text-teal-600">
+              <div className="p-2 rounded-xl bg-[#181D26] text-sky-400 border border-[#202632]">
                 <Gauge className="w-5 h-5" />
               </div>
-              <h2 className="text-base font-bold text-slate-900 font-sans tracking-tight">
+              <h2 className="text-base font-bold text-white font-sans tracking-tight">
                 1. Multi-Parameter In-Situ Sensor Telemetry
               </h2>
             </div>
 
-            {/* Subtab Controls (Exact style from reference image) */}
-            <div className="flex items-center bg-slate-100 p-1 rounded-2xl text-xs font-semibold">
+            {/* Subtab Controls */}
+            <div className="flex items-center bg-[#0B0D11] p-1 rounded-xl border border-[#202632] text-xs font-medium">
               <button
                 onClick={() => setActiveSubTab('atmospheric')}
-                className={`px-3.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
-                  activeSubTab === 'atmospheric' ? 'bg-[#0f766e] text-white font-bold shadow-md' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeSubTab === 'atmospheric' ? 'bg-[#181D26] text-white font-semibold border border-[#202632]' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Atmospheric
               </button>
               <button
                 onClick={() => setActiveSubTab('microgrid')}
-                className={`px-3.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
-                  activeSubTab === 'microgrid' ? 'bg-[#0f766e] text-white font-bold shadow-md' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeSubTab === 'microgrid' ? 'bg-[#181D26] text-white font-semibold border border-[#202632]' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Microgrid
               </button>
               <button
                 onClick={() => setActiveSubTab('riometer')}
-                className={`px-3.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
-                  activeSubTab === 'riometer' ? 'bg-[#0f766e] text-white font-bold shadow-md' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeSubTab === 'riometer' ? 'bg-[#181D26] text-white font-semibold border border-[#202632]' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Riometer
               </button>
               <button
                 onClick={() => setActiveSubTab('geotechnical')}
-                className={`px-3.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
-                  activeSubTab === 'geotechnical' ? 'bg-[#0f766e] text-white font-bold shadow-md' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeSubTab === 'geotechnical' ? 'bg-[#181D26] text-white font-semibold border border-[#202632]' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Geotechnical
@@ -236,28 +232,28 @@ export function InSituStreamsView() {
           {/* Atmospheric Tab 2x2 Grid */}
           {activeSubTab === 'atmospheric' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="bg-teal-50/50 p-4 rounded-2xl border border-teal-100 space-y-1">
-                <span className="text-slate-500 font-medium">AWS Wind Speed & Gust</span>
-                <p className="text-2xl font-extrabold text-teal-800 font-mono">{windVelocity}</p>
-                <p className="text-[11px] text-slate-500">Peak Gust: {isBharati ? '89.8 km/h (ESE)' : '72.4 km/h'}</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">AWS Wind Speed & Gust</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">{windVelocity}</p>
+                <p className="text-[11px] text-slate-400">Peak Gust: {isBharati ? '89.8 km/h (ESE)' : '72.4 km/h'}</p>
               </div>
 
-              <div className="bg-teal-50/50 p-4 rounded-2xl border border-teal-100 space-y-1">
-                <span className="text-slate-500 font-medium">Barometric Station Pressure</span>
-                <p className="text-2xl font-extrabold text-teal-800 font-mono">978.4 hPa</p>
-                <p className="text-[11px] text-slate-500">Stable Polar Gradient | Dew Point: -28°C</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Barometric Station Pressure</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">978.4 hPa</p>
+                <p className="text-[11px] text-slate-400">Stable Polar Gradient | Dew Point: -28°C</p>
               </div>
 
-              <div className="bg-teal-50/50 p-4 rounded-2xl border border-teal-100 space-y-1">
-                <span className="text-slate-500 font-medium">Snowpack Accumulation & Load</span>
-                <p className="text-2xl font-extrabold text-teal-800 font-mono">188.4 cm</p>
-                <p className="text-[11px] text-slate-500">Structural Snow Load: 310.2 kg/m²</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Snowpack Accumulation & Load</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">188.4 cm</p>
+                <p className="text-[11px] text-slate-400">Structural Snow Load: 310.2 kg/m²</p>
               </div>
 
-              <div className="bg-teal-50/50 p-4 rounded-2xl border border-teal-100 space-y-1">
-                <span className="text-slate-500 font-medium">Indoor Air Quality (HVAC Core)</span>
-                <p className="text-2xl font-extrabold text-cyan-700 font-mono">398 ppm CO2</p>
-                <p className="text-[11px] text-slate-500">PM2.5: 1.4 µg/m³ | VOC Index: 8 (Optimal)</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Indoor Air Quality (HVAC Core)</span>
+                <p className="text-2xl font-bold text-sky-400 font-mono tracking-tight">398 ppm CO2</p>
+                <p className="text-[11px] text-slate-400">PM2.5: 1.4 µg/m³ | VOC Index: 8 (Optimal)</p>
               </div>
             </div>
           )}
@@ -265,28 +261,28 @@ export function InSituStreamsView() {
           {/* Microgrid Tab 2x2 Grid */}
           {activeSubTab === 'microgrid' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100 space-y-1">
-                <span className="text-slate-500 font-medium">Diesel Cogeneration (CHP)</span>
-                <p className="text-2xl font-extrabold text-amber-700 font-mono">{isBharati ? '390 kW' : '265 kW'}</p>
-                <p className="text-[11px] text-slate-500">Volvo/Cummins Sets Operating in Parallel</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Diesel Cogeneration (CHP)</span>
+                <p className="text-2xl font-bold text-amber-400 font-mono tracking-tight">{isBharati ? '390 kW' : '265 kW'}</p>
+                <p className="text-[11px] text-slate-400">Volvo/Cummins Sets Operating in Parallel</p>
               </div>
 
-              <div className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100 space-y-1">
-                <span className="text-slate-500 font-medium">Renewable Solar PV & Wind</span>
-                <p className="text-2xl font-extrabold text-amber-700 font-mono">{isBharati ? '100 kW' : '63.3 kW'}</p>
-                <p className="text-[11px] text-slate-500">Solar PV Array + Micro Wind Turbines</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Renewable Solar PV & Wind</span>
+                <p className="text-2xl font-bold text-sky-400 font-mono tracking-tight">{isBharati ? '100 kW' : '63.3 kW'}</p>
+                <p className="text-[11px] text-slate-400">Solar PV Array + Micro Wind Turbines</p>
               </div>
 
-              <div className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100 space-y-1">
-                <span className="text-slate-500 font-medium">Polar ATF / Jet A-1 Reserves</span>
-                <p className="text-2xl font-extrabold text-amber-700 font-mono">{isBharati ? '92,000 L' : '48,500 L'}</p>
-                <p className="text-[11px] text-slate-500">Current Burn: {isBharati ? '38.2 L/h' : '24.5 L/h'}</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Polar ATF / Jet A-1 Reserves</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">{isBharati ? '92,000 L' : '48,500 L'}</p>
+                <p className="text-[11px] text-slate-400">Current Burn: {isBharati ? '38.2 L/h' : '24.5 L/h'}</p>
               </div>
 
-              <div className="bg-amber-50/50 p-4 rounded-2xl border border-amber-100 space-y-1">
-                <span className="text-slate-500 font-medium">Grid Phase Voltage & Frequency</span>
-                <p className="text-2xl font-extrabold text-amber-700 font-mono">231.0 V</p>
-                <p className="text-[11px] text-slate-500">Frequency: 50.01 Hz | Breakers: NOMINAL</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Grid Phase Voltage & Frequency</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">231.0 V</p>
+                <p className="text-[11px] text-slate-400">Frequency: 50.01 Hz | Breakers: NOMINAL</p>
               </div>
             </div>
           )}
@@ -294,28 +290,28 @@ export function InSituStreamsView() {
           {/* Riometer Tab 2x2 Grid */}
           {activeSubTab === 'riometer' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="bg-cyan-50/50 p-4 rounded-2xl border border-cyan-100 space-y-1">
-                <span className="text-slate-500 font-medium">Cosmic Noise Absorption (38.2 MHz)</span>
-                <p className="text-2xl font-extrabold text-cyan-700 font-mono">{riometerDb}</p>
-                <p className="text-[11px] text-slate-500">Wide-Beam Riometer Antenna Array</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Cosmic Noise Absorption (38.2 MHz)</span>
+                <p className="text-2xl font-bold text-sky-400 font-mono tracking-tight">{riometerDb}</p>
+                <p className="text-[11px] text-slate-400">Wide-Beam Riometer Antenna Array</p>
               </div>
 
-              <div className="bg-cyan-50/50 p-4 rounded-2xl border border-cyan-100 space-y-1">
-                <span className="text-slate-500 font-medium">Solar Particle Radiation Flux</span>
-                <p className="text-2xl font-extrabold text-cyan-700 font-mono">8.2 pfu</p>
-                <p className="text-[11px] text-slate-500">Quiet Geomagnetic Baseline Condition</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Solar Particle Radiation Flux</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">8.2 pfu</p>
+                <p className="text-[11px] text-slate-400">Quiet Geomagnetic Baseline Condition</p>
               </div>
 
-              <div className="bg-cyan-50/50 p-4 rounded-2xl border border-cyan-100 space-y-1">
-                <span className="text-slate-500 font-medium">SATCOM Signal Attenuation</span>
-                <p className="text-2xl font-extrabold text-cyan-700 font-mono">-0.4 dB</p>
-                <p className="text-[11px] text-slate-500">Polar VSAT Uplink Margin: 94%</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">SATCOM Signal Attenuation</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">-0.4 dB</p>
+                <p className="text-[11px] text-slate-400">Polar VSAT Uplink Margin: 94%</p>
               </div>
 
-              <div className="bg-cyan-50/50 p-4 rounded-2xl border border-cyan-100 space-y-1">
-                <span className="text-slate-500 font-medium">Ionospheric Flare State</span>
-                <p className="text-2xl font-extrabold text-emerald-700 font-mono">QUIET</p>
-                <p className="text-[11px] text-slate-500">Zero Blackout Threshold Triggered</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Ionospheric Flare State</span>
+                <p className="text-2xl font-bold text-emerald-400 font-mono tracking-tight">QUIET</p>
+                <p className="text-[11px] text-slate-400">Zero Blackout Threshold Triggered</p>
               </div>
             </div>
           )}
@@ -323,101 +319,101 @@ export function InSituStreamsView() {
           {/* Geotechnical Tab 2x2 Grid */}
           {activeSubTab === 'geotechnical' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 space-y-1">
-                <span className="text-slate-500 font-medium">Surface GPS Glacier Drift</span>
-                <p className="text-2xl font-extrabold text-purple-700 font-mono">{driftRate}</p>
-                <p className="text-[11px] text-slate-500">Continental Ice Sheet Margin Vector</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Surface GPS Glacier Drift</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">{driftRate}</p>
+                <p className="text-[11px] text-slate-400">Continental Ice Sheet Margin Vector</p>
               </div>
 
-              <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 space-y-1">
-                <span className="text-slate-500 font-medium">Permafrost Foundation Tilt</span>
-                <p className="text-2xl font-extrabold text-purple-700 font-mono">0.08°</p>
-                <p className="text-[11px] text-slate-500">Bedrock Anchor Hydraulic Jack Sensors</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Permafrost Foundation Tilt</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">0.08°</p>
+                <p className="text-[11px] text-slate-400">Bedrock Anchor Hydraulic Jack Sensors</p>
               </div>
 
-              <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 space-y-1">
-                <span className="text-slate-500 font-medium">Stilt Pillar Strain Rating</span>
-                <p className="text-2xl font-extrabold text-purple-700 font-mono">42.8%</p>
-                <p className="text-[11px] text-slate-500">Within Nominal Safe Structural Bounds</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Stilt Pillar Strain Rating</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">42.8%</p>
+                <p className="text-[11px] text-slate-400">Within Nominal Safe Structural Bounds</p>
               </div>
 
-              <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 space-y-1">
-                <span className="text-slate-500 font-medium">Seismic Micro-Vibration RMS</span>
-                <p className="text-2xl font-extrabold text-purple-700 font-mono">0.98 mm/s</p>
-                <p className="text-[11px] text-slate-500">Triaxial Accelerometers (Under 2.5 mm/s)</p>
+              <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-1">
+                <span className="text-slate-400 font-medium">Seismic Micro-Vibration RMS</span>
+                <p className="text-2xl font-bold text-white font-mono tracking-tight">0.98 mm/s</p>
+                <p className="text-[11px] text-slate-400">Triaxial Accelerometers (Under 2.5 mm/s)</p>
               </div>
             </div>
           )}
         </div>
 
         {/* Right Column: 2. Edge Serialization & Telemetry Gateway */}
-        <div className="lg:col-span-5 bg-white border border-teal-100 rounded-3xl p-6 shadow-sm space-y-5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div className="lg:col-span-5 bg-[#12161D] border border-[#202632] rounded-2xl p-6 space-y-5">
+          <div className="flex items-center justify-between border-b border-[#202632] pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-teal-50 text-teal-600">
+              <div className="p-2 rounded-xl bg-[#181D26] text-sky-400 border border-[#202632]">
                 <Cpu className="w-5 h-5" />
               </div>
-              <h2 className="text-base font-bold text-slate-900 font-sans tracking-tight">
+              <h2 className="text-base font-bold text-white font-sans tracking-tight">
                 2. Ingestion Gateway & Stream Transport
               </h2>
             </div>
-            <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-teal-100 text-teal-800 font-bold border border-teal-200">
+            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#181D26] text-slate-300 font-medium border border-[#202632]">
               100 Hz Raw
             </span>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-50 to-teal-50/40 p-4 rounded-2xl border border-teal-100 space-y-3 font-sans text-xs">
+          <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-3 font-sans text-xs">
             <div className="flex justify-between items-center">
-              <span className="font-bold text-slate-900 text-sm">NCPOR Protobuf Binary Gateway</span>
-              <span className="text-teal-700 font-extrabold font-mono bg-teal-100 px-2.5 py-0.5 rounded-full border border-teal-200 flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-teal-500 animate-ping" />
+              <span className="font-semibold text-white text-sm">NCPOR Protobuf Binary Gateway</span>
+              <span className="text-emerald-400 font-bold font-mono bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-800/60 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 Live Stream
               </span>
             </div>
 
             <div className="space-y-1.5">
-              <div className="flex justify-between text-[11px] text-slate-500 font-medium">
+              <div className="flex justify-between text-[11px] text-slate-400 font-medium">
                 <span>Ingestion Pipeline Throughput</span>
-                <span className="font-bold text-teal-800">100% Buffered</span>
+                <span className="font-bold text-white">100% Buffered</span>
               </div>
-              <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-                <div className="bg-gradient-to-r from-teal-400 to-cyan-500 h-full rounded-full" style={{ width: '100%' }} />
+              <div className="w-full bg-[#0B0D11] rounded-full h-2 overflow-hidden border border-[#202632]">
+                <div className="bg-sky-500 h-full rounded-full" style={{ width: '100%' }} />
               </div>
             </div>
 
-            <div className="space-y-1.5 text-[11px] text-slate-600 pt-2 border-t border-slate-200/60 font-mono">
+            <div className="space-y-1.5 text-[11px] text-slate-300 pt-2 border-t border-[#202632] font-mono">
               <div className="flex justify-between">
-                <span>Stream Protocol:</span>
-                <span className="text-slate-900 font-semibold">Google Protocol Buffers (v3)</span>
+                <span className="text-slate-400">Stream Protocol:</span>
+                <span className="text-white font-medium">Google Protocol Buffers (v3)</span>
               </div>
               <div className="flex justify-between">
-                <span>Compression Savings:</span>
-                <span className="text-teal-700 font-bold">82.4% vs JSON Payload</span>
+                <span className="text-slate-400">Compression Savings:</span>
+                <span className="text-sky-400 font-medium">82.4% vs JSON Payload</span>
               </div>
               <div className="flex justify-between">
-                <span>Local Buffer Queue:</span>
-                <span className="text-slate-900 font-semibold">0 Packets (Online Low-Latency)</span>
+                <span className="text-slate-400">Local Buffer Queue:</span>
+                <span className="text-white font-medium">0 Packets (Online Low-Latency)</span>
               </div>
               <div className="flex justify-between">
-                <span>Ingestion Server:</span>
-                <span className="text-slate-900 font-semibold">NCPOR Central Gateway (Goa)</span>
+                <span className="text-slate-400">Ingestion Server:</span>
+                <span className="text-white font-medium">NCPOR Central Gateway (Goa)</span>
               </div>
             </div>
           </div>
 
-          {/* Telemetry Snapshot Export Action (Exact style from reference image) */}
-          <div className="bg-teal-50/70 p-4 rounded-2xl border border-teal-100 space-y-2">
+          {/* Telemetry Snapshot Export Action */}
+          <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] space-y-2">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-              <span className="text-xs font-sans text-slate-900 font-bold">In-Situ Telemetry Archive</span>
+              <span className="text-xs font-sans text-slate-300 font-medium">In-Situ Telemetry Archive</span>
               <button
                 onClick={handleExportSnapshot}
                 disabled={exportStatus === 'exporting'}
-                className={`px-3.5 py-1.5 font-sans text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                className={`px-3.5 py-1.5 font-sans text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
                   exportStatus === 'success'
-                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
+                    ? 'bg-emerald-600 text-white'
                     : exportStatus === 'exporting'
-                    ? 'bg-teal-400 text-white cursor-wait'
-                    : 'bg-[#0f766e] hover:bg-teal-800 text-white shadow-teal-600/20'
+                    ? 'bg-neutral-700 text-neutral-400 cursor-wait'
+                    : 'bg-white text-neutral-950 hover:bg-neutral-200'
                 }`}
               >
                 {exportStatus === 'exporting' ? (
@@ -438,9 +434,9 @@ export function InSituStreamsView() {
                 )}
               </button>
             </div>
-            <p className="text-[11px] text-slate-600 font-sans">
+            <p className="text-[11px] text-slate-400 font-sans">
               {exportStatus === 'success' ? (
-                <span className="text-emerald-700 font-medium font-sans">
+                <span className="text-emerald-400 font-medium font-sans">
                   ✓ Validated in-situ dataset CSV/JSON package archived for {stationData.stationName}.
                 </span>
               ) : (

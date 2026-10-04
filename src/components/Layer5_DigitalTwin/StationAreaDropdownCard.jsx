@@ -171,7 +171,7 @@ export function StationAreaDropdownCard({
   return (
     <div 
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
-      className={`absolute z-40 shadow-2xl rounded-2xl bg-white border border-slate-200 text-slate-900 font-sans transition-all duration-200 select-none ${
+      className={`absolute z-40 shadow-2xl rounded-2xl bg-[#12161D]/95 border border-[#202632] backdrop-blur-md text-white font-sans transition-all duration-200 select-none ${
         isCompressed ? 'w-auto max-w-xs' : 'max-w-md w-full'
       }`}
     >
@@ -179,17 +179,17 @@ export function StationAreaDropdownCard({
       {/* Movable Drag Handle & Header */}
       <div 
         onMouseDown={handleMouseDown}
-        className="p-3 sm:p-4 border-b border-slate-100 flex items-center justify-between gap-2 cursor-move bg-slate-50/80 rounded-t-2xl border-b hover:bg-slate-100/80 transition-colors"
+        className="p-3 sm:p-4 border-b border-[#202632] flex items-center justify-between gap-2 cursor-move bg-[#181D26]/90 rounded-t-2xl hover:bg-[#181D26] transition-colors"
         title="Click and drag to move HUD anywhere on screen"
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <Move className="w-4 h-4 text-slate-400 shrink-0" />
-          <div className={`p-2 rounded-xl ${currentArea.bgColor} ${currentArea.color} shrink-0`}>
+          <div className="p-2 rounded-xl bg-[#0B0D11] text-sky-400 border border-[#202632] shrink-0">
             <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
 
           <div className="flex-1 min-w-0">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+            <span className="text-[10px] font-mono font-medium uppercase tracking-wider text-slate-400 block">
               STATION AREA CONTROL HUD
             </span>
             
@@ -197,15 +197,15 @@ export function StationAreaDropdownCard({
               <div className="relative no-drag">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="w-full flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800 hover:text-[#1A5F5C] transition-colors text-left gap-1 py-0.5"
+                  className="w-full flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:text-sky-400 transition-colors text-left gap-1 py-0.5"
                 >
                   <span className="truncate">{currentArea.title}</span>
-                  <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#1A5F5C]' : 'text-slate-400'}`} />
+                  <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-sky-400' : 'text-slate-400'}`} />
                 </button>
 
                 {/* Dropdown Options List */}
                 {isOpen && (
-                  <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-2xl py-1.5 z-50 max-h-64 overflow-y-auto divide-y divide-slate-100">
+                  <div className="absolute left-0 right-0 top-full mt-2 bg-[#12161D] border border-[#202632] rounded-xl shadow-2xl py-1.5 z-50 max-h-64 overflow-y-auto divide-y divide-[#202632]">
                     {stationAreas.map((area) => {
                       const AreaIcon = area.icon;
                       const isSelected = area.id === activeAreaKey;
@@ -217,15 +217,15 @@ export function StationAreaDropdownCard({
                             if (onFocusCamera) onFocusCamera(area.id);
                             setIsOpen(false);
                           }}
-                          className={`w-full text-left px-3.5 py-2.5 flex items-center gap-3 hover:bg-slate-50 transition-colors ${
-                            isSelected ? 'bg-teal-50 font-bold text-[#1A5F5C]' : 'text-slate-700 font-medium'
+                          className={`w-full text-left px-3.5 py-2.5 flex items-center gap-3 hover:bg-[#181D26] transition-colors ${
+                            isSelected ? 'bg-[#181D26] font-semibold text-white' : 'text-slate-300 font-normal'
                           }`}
                         >
-                          <div className={`p-1.5 rounded-lg ${area.bgColor} ${area.color} shrink-0`}>
+                          <div className="p-1.5 rounded-lg bg-[#0B0D11] text-slate-400 border border-[#202632] shrink-0">
                             <AreaIcon className="w-4 h-4" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-xs truncate font-semibold">{area.title}</p>
+                            <p className="text-xs truncate font-medium">{area.title}</p>
                             <p className="text-[10px] text-slate-400 truncate">{area.metrics[0].label}: {area.metrics[0].value}</p>
                           </div>
                         </button>
@@ -235,7 +235,7 @@ export function StationAreaDropdownCard({
                 )}
               </div>
             ) : (
-              <span className="text-xs font-bold text-slate-800 truncate block">
+              <span className="text-xs font-semibold text-white truncate block">
                 {currentArea.title}
               </span>
             )}
@@ -244,14 +244,14 @@ export function StationAreaDropdownCard({
 
         {/* Live Metrics Badge & Compress/Expand Control */}
         <div className="flex items-center gap-1.5 no-drag shrink-0">
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 hidden sm:flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-medium bg-[#181D26] text-emerald-400 border border-[#202632] hidden sm:flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             LIVE METRICS
           </span>
 
           <button
             onClick={() => setIsCompressed(!isCompressed)}
-            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#181D26] transition-colors"
             title={isCompressed ? 'Expand HUD Card' : 'Compress / Minimize HUD Card'}
           >
             {isCompressed ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
@@ -261,27 +261,27 @@ export function StationAreaDropdownCard({
 
       {/* Expanded Details Body */}
       {!isCompressed && (
-        <div className="p-3 sm:p-4 space-y-3 bg-slate-50/70 rounded-b-2xl no-drag">
-          <p className="text-xs text-slate-600 leading-relaxed font-sans font-normal">
+        <div className="p-3 sm:p-4 space-y-3 bg-[#12161D] rounded-b-2xl no-drag">
+          <p className="text-xs text-slate-400 leading-relaxed font-sans font-normal">
             {currentArea.description}
           </p>
 
           {/* Metric Tiles */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {currentArea.metrics.map((m, idx) => (
-              <div key={idx} className="bg-white p-2.5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+              <div key={idx} className="bg-[#181D26] p-2.5 rounded-xl border border-[#202632] flex flex-col justify-between">
                 <span className="text-[10px] font-mono text-slate-400 font-medium truncate block">
                   {m.label}
                 </span>
-                <span className="text-xs font-bold font-mono text-slate-900 mt-1 block truncate">
+                <span className="text-xs font-bold font-mono text-white mt-1 block truncate">
                   {m.value}
                 </span>
-                <span className={`text-[9px] font-mono font-bold px-1.5 py-0.2 rounded mt-1 inline-block w-fit ${
+                <span className={`text-[9px] font-mono font-medium px-1.5 py-0.5 rounded mt-1 inline-block w-fit ${
                   m.status === 'WARNING' || m.status === 'FAULT' || m.status === 'TRIPPED' || m.status === 'EXTREME' || m.status === 'HIGH HEAT'
-                    ? 'bg-rose-100 text-rose-700 border border-rose-300'
+                    ? 'bg-rose-950/60 text-rose-400 border border-rose-800/60'
                     : m.status === 'DE-ICING' || m.status === 'DEGRADED'
-                    ? 'bg-amber-100 text-amber-700 border border-amber-300'
-                    : 'bg-emerald-100 text-emerald-700 border border-emerald-300'
+                    ? 'bg-amber-950/60 text-amber-400 border border-amber-800/60'
+                    : 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/60'
                 }`}>
                   {m.status}
                 </span>
@@ -291,13 +291,13 @@ export function StationAreaDropdownCard({
 
           {/* Dynamic Sensor Heat Presentation Matrix overlay ONLY visible when Heatmap mode is ON */}
           {isHeatmapActive && (
-            <div className="p-3 rounded-xl bg-slate-900 text-white space-y-2 border border-rose-500/40 animate-fade-in font-mono text-xs shadow-lg">
-              <div className="flex items-center justify-between text-amber-400 border-b border-slate-800 pb-1.5">
+            <div className="p-3 rounded-xl bg-[#0B0D11] text-white space-y-2 border border-[#202632] animate-fade-in font-mono text-xs">
+              <div className="flex items-center justify-between text-slate-300 border-b border-[#202632] pb-1.5">
                 <div className="flex items-center gap-1.5">
-                  <HeatIcon className="w-4 h-4 text-rose-400 animate-pulse" />
-                  <span className="font-bold">SENSOR THERMAL HEATMAP PRESENTATION</span>
+                  <HeatIcon className="w-4 h-4 text-rose-400" />
+                  <span className="font-semibold text-white">SENSOR THERMAL HEATMAP PRESENTATION</span>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/30 font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-rose-950/60 text-rose-400 border border-rose-800/60 font-medium">
                   HEATMAP ON
                 </span>
               </div>
@@ -360,19 +360,19 @@ export function StationAreaDropdownCard({
                   return sensors.map((s, idx) => (
                     <div 
                       key={idx} 
-                      className={`p-2 rounded font-mono transition-all ${
+                      className={`p-2 rounded-lg font-mono border ${
                         s.isHot
-                          ? 'bg-gradient-to-t from-rose-950 via-rose-800 to-red-600 text-white border border-rose-400 shadow-lg animate-pulse'
+                          ? 'bg-rose-950/40 text-rose-300 border-rose-800/60'
                           : s.label === 'WARM' || s.label === 'HEATED'
-                          ? 'bg-gradient-to-t from-amber-950 to-amber-800 text-amber-100 border border-amber-500/40'
+                          ? 'bg-amber-950/40 text-amber-300 border-amber-800/60'
                           : s.label === 'COLD' || s.label === 'COOL'
-                          ? 'bg-gradient-to-t from-sky-950 to-blue-900 text-cyan-100 border border-cyan-500/30'
-                          : 'bg-gradient-to-t from-emerald-950 to-emerald-800 text-emerald-100 border border-emerald-500/30'
+                          ? 'bg-sky-950/40 text-sky-300 border-sky-800/60'
+                          : 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
                       }`}
                     >
-                      <span className="block truncate opacity-90">{s.name}</span>
+                      <span className="block truncate text-slate-400">{s.name}</span>
                       <strong className="block text-white text-xs mt-0.5">{s.temp}</strong>
-                      <span className={`text-[8px] font-bold block mt-0.5 ${s.isHot ? 'text-rose-200' : 'opacity-80'}`}>
+                      <span className="text-[8px] font-medium block mt-0.5 opacity-90">
                         {s.label}
                       </span>
                     </div>
@@ -383,8 +383,8 @@ export function StationAreaDropdownCard({
           )}
 
           {/* Area Actions Bar */}
-          <div className="pt-2 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-1.5">
-            <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">
+          <div className="pt-2 border-t border-[#202632] flex flex-wrap items-center justify-between gap-1.5">
+            <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">
               AREA ACTIONS:
             </span>
 
@@ -393,17 +393,17 @@ export function StationAreaDropdownCard({
                 onClick={() => {
                   if (onFocusCamera) onFocusCamera(activeAreaKey);
                 }}
-                className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-[#1A5F5C] text-white hover:bg-[#134947] transition-all flex items-center gap-1 shadow-sm"
+                className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-white text-neutral-950 hover:bg-neutral-200 transition-all flex items-center gap-1 shadow-sm"
                 title="Focus 3D View on this Area"
               >
-                <Eye className="w-3.5 h-3.5 text-teal-200" />
+                <Eye className="w-3.5 h-3.5" />
                 Focus 3D View
               </button>
 
               <button
                 onClick={() => setIsCutawayView(!isCutawayView)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-1 ${
-                  isCutawayView ? 'bg-amber-500 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1 ${
+                  isCutawayView ? 'bg-[#181D26] text-white border border-[#202632]' : 'bg-[#0B0D11] text-slate-400 hover:text-white border border-[#202632]'
                 }`}
               >
                 <Sliders className="w-3.5 h-3.5" />
@@ -412,8 +412,8 @@ export function StationAreaDropdownCard({
 
               <button
                 onClick={() => setIsHeatmapActive(!isHeatmapActive)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-1 ${
-                  isHeatmapActive ? 'bg-rose-600 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1 ${
+                  isHeatmapActive ? 'bg-[#181D26] text-rose-400 border border-rose-800/60' : 'bg-[#0B0D11] text-slate-400 hover:text-white border border-[#202632]'
                 }`}
               >
                 <Thermometer className="w-3.5 h-3.5" />
@@ -428,8 +428,8 @@ export function StationAreaDropdownCard({
                       triggerEdgeAction(isGridFaultActive ? 'RESET_GRID' : 'TRIP_GRID', 'Grid breaker toggled from Area Card');
                     }
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-1 ${
-                    isGridFaultActive ? 'bg-rose-600 text-white shadow-sm' : 'bg-rose-100 text-rose-800 hover:bg-rose-200 border border-rose-300'
+                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1 ${
+                    isGridFaultActive ? 'bg-rose-950/60 text-rose-400 border border-rose-800/60' : 'bg-[#181D26] text-slate-300 hover:text-white border border-[#202632]'
                   }`}
                 >
                   <Zap className="w-3.5 h-3.5" />
@@ -445,8 +445,8 @@ export function StationAreaDropdownCard({
                       triggerEdgeAction('DE_ICE_RADOME', 'Radome de-icing system toggled');
                     }
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-1 ${
-                    isStormActive ? 'bg-blue-600 text-white shadow-sm' : 'bg-blue-100 text-blue-800 hover:bg-blue-200 border border-blue-300'
+                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1 ${
+                    isStormActive ? 'bg-sky-950/60 text-sky-400 border border-sky-800/60' : 'bg-[#181D26] text-slate-300 hover:text-white border border-[#202632]'
                   }`}
                 >
                   <RefreshCw className="w-3.5 h-3.5" />

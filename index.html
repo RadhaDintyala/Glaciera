@@ -13,10 +13,21 @@
         theme: {
           extend: {
             colors: {
-              polar: {
-                950: '#020617',
-                900: '#0f172a',
-                800: '#1e293b',
+              canvas: '#0B0D11',
+              surface: {
+                DEFAULT: '#12161D',
+                elevated: '#181D26',
+                hover: '#1F2430',
+              },
+              border: {
+                subtle: '#202632',
+                strong: '#2E3748',
+              },
+              arctic: {
+                DEFAULT: '#0EA5E9',
+                hover: '#38BDF8',
+                surface: 'rgba(14, 165, 233, 0.08)',
+                border: 'rgba(14, 165, 233, 0.25)',
               }
             }
           }
@@ -24,7 +35,7 @@
       }
     </script>
   </head>
-  <body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+  <body class="bg-[#0B0D11] text-[#F8FAFC] min-h-screen font-sans antialiased selection:bg-sky-500/20 selection:text-sky-200">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -21,13 +21,13 @@ export function RiskHeatMap2DChart() {
   ];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-2xl space-y-6">
+    <div className="bg-[#12161D] border border-[#202632] rounded-2xl p-6 shadow-xl space-y-6">
       {/* Chart Title Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-800 pb-4 gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#202632] pb-4 gap-2">
         <div>
           <div className="flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-amber-400" />
-            <h2 className="text-xl font-extrabold text-white font-sans tracking-wide">
+            <h2 className="text-xl font-bold text-white font-sans tracking-tight">
               Risk Heat Map
             </h2>
           </div>
@@ -37,13 +37,13 @@ export function RiskHeatMap2DChart() {
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/30">
+          <span className="px-2.5 py-1 rounded bg-[#181D26] text-emerald-400 border border-[#202632]">
             Low Risk (Green)
           </span>
-          <span className="px-2.5 py-1 rounded bg-yellow-950 text-yellow-300 border border-yellow-500/30">
+          <span className="px-2.5 py-1 rounded bg-[#181D26] text-amber-400 border border-[#202632]">
             Moderate (Yellow)
           </span>
-          <span className="px-2.5 py-1 rounded bg-rose-950 text-rose-300 border border-rose-500/30">
+          <span className="px-2.5 py-1 rounded bg-[#181D26] text-rose-400 border border-[#202632]">
             Critical (Red)
           </span>
         </div>
@@ -53,17 +53,17 @@ export function RiskHeatMap2DChart() {
       <div className="relative w-full max-w-4xl mx-auto space-y-2">
         {/* Y-Axis Label */}
         <div className="flex items-center gap-4">
-          <div className="-rotate-90 text-sm font-bold font-mono text-slate-300 tracking-wider shrink-0 uppercase">
+          <div className="-rotate-90 text-sm font-semibold font-mono text-slate-400 tracking-wider shrink-0 uppercase">
             Impact
           </div>
 
-          {/* Heat Map Gradient Box (Matches Image Palette) */}
-          <div className="relative flex-1 h-[420px] rounded-2xl border-2 border-slate-700 shadow-2xl overflow-hidden bg-gradient-to-tr from-lime-500 via-yellow-400 via-40% via-orange-500 to-red-600">
+          {/* Heat Map Gradient Box (Calibrated smooth transition without blinding fluorescent saturation) */}
+          <div className="relative flex-1 h-[420px] rounded-2xl border border-[#202632] shadow-xl overflow-hidden bg-gradient-to-tr from-emerald-900/60 via-amber-800/50 via-45% via-orange-900/60 to-rose-900/80">
             
             {/* Soft grid lines overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-            {/* Plotted Blue Data Nodes (Matching image circular dots with R1, R2, R3 labels) */}
+            {/* Plotted Data Nodes */}
             {riskNodes.map((node) => (
               <div
                 key={node.id}
@@ -71,9 +71,9 @@ export function RiskHeatMap2DChart() {
                 style={{ left: `${node.x}%`, bottom: `${node.y}%` }}
                 className="absolute -translate-x-1/2 translate-y-1/2 cursor-pointer group z-10"
               >
-                <div className="flex items-center gap-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-blue-400 shadow-xl group-hover:scale-110 transition-transform">
-                  <div className="w-3.5 h-3.5 rounded-full bg-blue-500 border-2 border-white shadow-md animate-pulse" />
-                  <span className="text-xs font-bold font-mono text-white whitespace-nowrap">
+                <div className="flex items-center gap-1.5 bg-[#0B0D11]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#202632] shadow-xl group-hover:border-sky-400 group-hover:scale-105 transition-all">
+                  <div className="w-2.5 h-2.5 rounded-full bg-sky-400 border border-white" />
+                  <span className="text-xs font-semibold font-mono text-white whitespace-nowrap">
                     {node.id}
                   </span>
                 </div>
@@ -83,34 +83,34 @@ export function RiskHeatMap2DChart() {
         </div>
 
         {/* X-Axis Label */}
-        <div className="text-center text-sm font-bold font-mono text-slate-300 tracking-wider pl-12 uppercase">
+        <div className="text-center text-sm font-semibold font-mono text-slate-400 tracking-wider pl-12 uppercase">
           Activity
         </div>
       </div>
 
       {/* Selected Node Details Box */}
       {selectedNode ? (
-        <div className="bg-slate-950 p-4 rounded-xl border border-blue-500/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs animate-fade-in">
+        <div className="bg-[#181D26] p-4 rounded-xl border border-[#202632] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs animate-fade-in">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+              <span className="w-2 h-2 rounded-full bg-sky-400" />
               <h3 className="text-sm font-bold text-white">{selectedNode.name}</h3>
             </div>
-            <p className="text-slate-300 font-sans text-xs">{selectedNode.desc}</p>
+            <p className="text-slate-400 font-sans text-xs">{selectedNode.desc}</p>
           </div>
-          <div className="flex items-center gap-4 shrink-0">
-            <div className="bg-slate-900 px-3 py-1.5 rounded border border-slate-800">
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="bg-[#0B0D11] px-3 py-1.5 rounded-lg border border-[#202632]">
               <span className="text-slate-400 block text-[10px]">Impact Level</span>
-              <span className="text-amber-300 font-bold">{selectedNode.impact}</span>
+              <span className="text-white font-bold">{selectedNode.impact}</span>
             </div>
-            <div className="bg-slate-900 px-3 py-1.5 rounded border border-slate-800">
+            <div className="bg-[#0B0D11] px-3 py-1.5 rounded-lg border border-[#202632]">
               <span className="text-slate-400 block text-[10px]">Activity Score</span>
-              <span className="text-cyan-300 font-bold">{selectedNode.activity}</span>
+              <span className="text-sky-400 font-bold">{selectedNode.activity}</span>
             </div>
           </div>
         </div>
       ) : (
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 text-center text-xs font-mono text-slate-400">
+        <div className="bg-[#181D26] p-3 rounded-xl border border-[#202632] text-center text-xs font-mono text-slate-400">
           Click any blue node (R1, R2, R3...) on the Risk Heat Map chart to view subsystem impact details.
         </div>
       )}

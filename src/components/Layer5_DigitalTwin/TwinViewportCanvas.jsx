@@ -133,9 +133,9 @@ export function TwinViewportCanvas() {
   };
 
   return (
-    <div className="relative w-full h-[680px] bg-slate-950 rounded-2xl overflow-hidden border border-cyan-900/40 shadow-2xl">
+    <div className="relative w-full h-[680px] bg-[#0B0D11] rounded-2xl overflow-hidden border border-[#202632] shadow-2xl">
       
-      {/* High-Contrast Interactive White Dropdown Card Overlay */}
+      {/* High-Contrast Interactive Dropdown Card Overlay */}
       <StationAreaDropdownCard
         activeAreaKey={activeAreaKey}
         setActiveAreaKey={setActiveAreaKey}
@@ -167,10 +167,10 @@ export function TwinViewportCanvas() {
         gl={{ toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.35, antialias: true }}
         camera={{ position: [28, 22, 38], fov: 42 }}
       >
-        <color attach="background" args={['#090d16']} />
+        <color attach="background" args={['#0B0D11']} />
         
         {/* Soft Horizon Haze Fog */}
-        <fog attach="fog" args={['#090d16', 35, 110]} />
+        <fog attach="fog" args={['#0B0D11', 35, 110]} />
 
         {/* Photorealistic Environment Lighting */}
         <Environment preset="night" />
@@ -201,7 +201,7 @@ export function TwinViewportCanvas() {
         <AntarcticTerrain />
 
         {/* Ambient Shadows */}
-        <ContactShadows position={[0, 0.02, 0]} opacity={0.7} scale={50} blur={2.0} far={12} color="#090d16" />
+        <ContactShadows position={[0, 0.02, 0]} opacity={0.7} scale={50} blur={2.0} far={12} color="#0B0D11" />
 
         {/* 3D Model Rendering */}
         {modelSource === 'glb' ? (

@@ -43,20 +43,20 @@ export function MaitriStationView({ onSwitchStation }) {
     : '-24.5°C';
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 max-w-[1700px] mx-auto space-y-6 animate-fade-in font-sans">
+    <div className="min-h-screen bg-[#0B0D11] text-[#F8FAFC] p-4 sm:p-6 max-w-[1700px] mx-auto space-y-6 animate-fade-in font-sans">
       
       {/* Header Banner */}
-      <div className="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-5 backdrop-blur-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 shadow-2xl">
+      <div className="bg-[#12161D] border border-[#202632] rounded-2xl p-5 backdrop-blur-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 shadow-xl">
         <div className="flex items-center gap-4">
-          <div className="p-3.5 rounded-2xl bg-gradient-to-tr from-amber-600 via-orange-500 to-amber-400 text-white shadow-xl shadow-amber-500/20">
-            <Box className="w-7 h-7" />
+          <div className="p-3.5 rounded-xl bg-slate-800/80 text-white border border-slate-700/60 shadow-sm">
+            <Box className="w-6 h-6" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-extrabold tracking-tight text-white font-sans">
-                Maitri Station <span className="text-amber-400 font-mono text-lg font-normal">| 3D Digital Twin & Operation Hub</span>
+                Maitri Station <span className="text-slate-400 font-mono text-base font-normal">| 3D Digital Twin & Operation Hub</span>
               </h1>
-              <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/40 tracking-wide uppercase">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-slate-800/80 text-slate-300 border border-slate-700/60 tracking-wide uppercase">
                 Active 3D Mode
               </span>
             </div>
@@ -68,33 +68,33 @@ export function MaitriStationView({ onSwitchStation }) {
 
         {/* Live Status Indicators & Switch to Bharati Button */}
         <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
-          <div className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-2 shadow-inner">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-slate-300 font-semibold">BMS System: OPTIMAL</span>
+          <div className="px-3 py-1.5 rounded-xl bg-[#0B0D11] border border-[#202632] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="text-slate-300 font-medium">BMS: OPTIMAL</span>
           </div>
-          <div className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-2 shadow-inner">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
-            <span className="text-amber-300 font-semibold">VSAT Uplink: 480 Mbps</span>
+          <div className="px-3 py-1.5 rounded-xl bg-[#0B0D11] border border-[#202632] flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-sky-400" />
+            <span className="text-slate-300 font-medium">VSAT Uplink: 480 Mbps</span>
           </div>
 
           {/* Prominent Switch to Bharati Button */}
           <button
             onClick={handleSwitchToBharati}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-sans font-bold shadow-lg shadow-cyan-500/25 transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#181D26] hover:bg-[#1F2633] text-slate-200 hover:text-white border border-[#202632] hover:border-slate-700 font-sans font-medium text-xs shadow-sm transition-all cursor-pointer"
             title="Switch View to Bharati Antarctic Station 3D Digital Twin"
           >
-            <ArrowRightLeft className="w-4 h-4" />
+            <ArrowRightLeft className="w-3.5 h-3.5 text-slate-400" />
             <span>Switch to Bharati</span>
           </button>
         </div>
       </div>
 
       {/* 3D WebGL Digital Twin Viewport Section */}
-      <section className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 backdrop-blur-xl shadow-2xl space-y-3">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-800/80 pb-3 gap-2">
+      <section className="bg-[#12161D] border border-[#202632] rounded-2xl p-4 backdrop-blur-xl shadow-xl space-y-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#202632] pb-3 gap-2">
           <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-amber-400" />
-            <h2 className="text-sm font-bold text-white tracking-wide uppercase font-mono">
+            <Layers className="w-4 h-4 text-slate-400" />
+            <h2 className="text-sm font-semibold text-white tracking-wide uppercase font-mono">
               Maitri Aerodynamic Modular 3D Viewport & Area Inspector
             </h2>
           </div>
@@ -103,10 +103,10 @@ export function MaitriStationView({ onSwitchStation }) {
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setIsCutawayView(!isCutawayView)}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all ${
                 isCutawayView
-                  ? 'bg-amber-600 text-white shadow-md'
-                  : 'bg-slate-950 text-slate-300 hover:text-white border border-slate-800'
+                  ? 'bg-slate-800 text-white shadow-sm border border-slate-700'
+                  : 'bg-[#0B0D11] text-slate-400 hover:text-white border border-[#202632]'
               }`}
             >
               <Sliders className="w-3.5 h-3.5" />
@@ -115,10 +115,10 @@ export function MaitriStationView({ onSwitchStation }) {
 
             <button
               onClick={() => setIsHeatmapActive(!isHeatmapActive)}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all ${
                 isHeatmapActive
-                  ? 'bg-amber-600 text-white shadow-md'
-                  : 'bg-slate-950 text-slate-300 hover:text-white border border-slate-800'
+                  ? 'bg-slate-800 text-white shadow-sm border border-slate-700'
+                  : 'bg-[#0B0D11] text-slate-400 hover:text-white border border-[#202632]'
               }`}
             >
               <Thermometer className="w-3.5 h-3.5" />
@@ -128,7 +128,7 @@ export function MaitriStationView({ onSwitchStation }) {
         </div>
 
         {/* 3D WebGL Canvas */}
-        <div className="w-full rounded-xl overflow-hidden border border-slate-800 shadow-inner">
+        <div className="w-full rounded-xl overflow-hidden border border-[#202632] shadow-inner">
           <TwinViewportCanvas />
         </div>
       </section>
@@ -137,10 +137,10 @@ export function MaitriStationView({ onSwitchStation }) {
       <RiskHeatMap2DChart />
 
       {/* Real Area Location Inspector Tabs */}
-      <section className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-xl shadow-xl space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <section className="bg-[#12161D] border border-[#202632] rounded-2xl p-5 backdrop-blur-xl shadow-xl space-y-4">
+        <div className="flex items-center justify-between border-b border-[#202632] pb-3">
           <div className="flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-amber-400" />
+            <Building2 className="w-5 h-5 text-slate-400" />
             <h2 className="text-base font-bold text-white font-mono uppercase tracking-wide">
               Maitri II Station Zonal Architecture & Modular Layout
             </h2>
@@ -156,74 +156,74 @@ export function MaitriStationView({ onSwitchStation }) {
             onClick={() => setSelectedLevel('blockA')}
             className={`flex flex-col items-center justify-center p-3 rounded-xl border font-mono transition-all ${
               selectedLevel === 'blockA'
-                ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-400 shadow-lg'
-                : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white'
+                ? 'bg-slate-800 text-white border-slate-600 shadow-sm'
+                : 'bg-[#0B0D11] text-slate-400 border-[#202632] hover:text-white hover:border-slate-700'
             }`}
           >
-            <Building2 className="w-5 h-5 mb-1 text-teal-300" />
-            <span className="text-xs font-bold">Block A: Upper Tier Living</span>
-            <span className="text-[10px] text-slate-300">Cabins, Mess & Control</span>
+            <Building2 className="w-5 h-5 mb-1 text-slate-300" />
+            <span className="text-xs font-semibold">Block A: Upper Tier Living</span>
+            <span className="text-[10px] text-slate-400">Cabins, Mess & Control</span>
           </button>
 
           <button
             onClick={() => setSelectedLevel('blockB')}
             className={`flex flex-col items-center justify-center p-3 rounded-xl border font-mono transition-all ${
               selectedLevel === 'blockB'
-                ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-400 shadow-lg'
-                : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white'
+                ? 'bg-slate-800 text-white border-slate-600 shadow-sm'
+                : 'bg-[#0B0D11] text-slate-400 border-[#202632] hover:text-white hover:border-slate-700'
             }`}
           >
-            <Server className="w-5 h-5 mb-1 text-cyan-300" />
-            <span className="text-xs font-bold">Block B: Lower Tier Science</span>
-            <span className="text-[10px] text-slate-300">18 Labs & Workstations</span>
+            <Server className="w-5 h-5 mb-1 text-slate-300" />
+            <span className="text-xs font-semibold">Block B: Lower Tier Science</span>
+            <span className="text-[10px] text-slate-400">18 Labs & Workstations</span>
           </button>
 
           <button
             onClick={() => setSelectedLevel('blockC')}
             className={`flex flex-col items-center justify-center p-3 rounded-xl border font-mono transition-all ${
               selectedLevel === 'blockC'
-                ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-400 shadow-lg'
-                : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white'
+                ? 'bg-slate-800 text-white border-slate-600 shadow-sm'
+                : 'bg-[#0B0D11] text-slate-400 border-[#202632] hover:text-white hover:border-slate-700'
             }`}
           >
-            <Zap className="w-5 h-5 mb-1 text-amber-400" />
-            <span className="text-xs font-bold">Block C: Generator & Wind</span>
-            <span className="text-[10px] text-slate-300">Cummins DG & Wind Spine</span>
+            <Zap className="w-5 h-5 mb-1 text-slate-300" />
+            <span className="text-xs font-semibold">Block C: Generator & Wind</span>
+            <span className="text-[10px] text-slate-400">Cummins DG & Wind Spine</span>
           </button>
 
           <button
             onClick={() => setSelectedLevel('lake')}
             className={`flex flex-col items-center justify-center p-3 rounded-xl border font-mono transition-all ${
               selectedLevel === 'lake'
-                ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-400 shadow-lg'
-                : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white'
+                ? 'bg-slate-800 text-white border-slate-600 shadow-sm'
+                : 'bg-[#0B0D11] text-slate-400 border-[#202632] hover:text-white hover:border-slate-700'
             }`}
           >
-            <Waves className="w-5 h-5 mb-1 text-blue-300" />
-            <span className="text-xs font-bold">Lake Priyadarshini Intake</span>
-            <span className="text-[10px] text-slate-300">Freshwater Sub-Ice Pump</span>
+            <Waves className="w-5 h-5 mb-1 text-slate-300" />
+            <span className="text-xs font-semibold">Lake Priyadarshini Intake</span>
+            <span className="text-[10px] text-slate-400">Freshwater Sub-Ice Pump</span>
           </button>
 
           <button
             onClick={() => setSelectedLevel('site')}
             className={`flex flex-col items-center justify-center p-3 rounded-xl border font-mono transition-all ${
               selectedLevel === 'site'
-                ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-400 shadow-lg'
-                : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white'
+                ? 'bg-slate-800 text-white border-slate-600 shadow-sm'
+                : 'bg-[#0B0D11] text-slate-400 border-[#202632] hover:text-white hover:border-slate-700'
             }`}
           >
-            <Database className="w-5 h-5 mb-1 text-purple-300" />
-            <span className="text-xs font-bold">Oasis Ground & Depot</span>
-            <span className="text-[10px] text-slate-300">Containers & Fuel Tanks</span>
+            <Database className="w-5 h-5 mb-1 text-slate-300" />
+            <span className="text-xs font-semibold">Oasis Ground & Depot</span>
+            <span className="text-[10px] text-slate-400">Containers & Fuel Tanks</span>
           </button>
         </div>
 
         {/* Selected Zonal Details Box */}
-        <div className="bg-slate-950/90 border border-slate-800 p-5 rounded-xl space-y-3 font-mono">
+        <div className="bg-[#0B0D11] border border-[#202632] p-5 rounded-xl space-y-3 font-mono">
           {selectedLevel === 'blockA' && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-amber-300 uppercase flex items-center gap-2">
-                <Building2 className="w-4 h-4" /> Block A: Upper Aerodynamic Module Living & Operations
+              <h3 className="text-sm font-bold text-white uppercase flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-slate-400" /> Block A: Upper Aerodynamic Module Living & Operations
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 Houses crew living quarters, dining hall, galley kitchen, station commander desk, medical clinic, and a panoramic double-glazed end lounge overlooking Schirmacher Oasis permafrost.
@@ -233,8 +233,8 @@ export function MaitriStationView({ onSwitchStation }) {
 
           {selectedLevel === 'blockB' && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-cyan-300 uppercase flex items-center gap-2">
-                <Server className="w-4 h-4" /> Block B: Lower Aerodynamic Science Superstructure
+              <h3 className="text-sm font-bold text-white uppercase flex items-center gap-2">
+                <Server className="w-4 h-4 text-slate-400" /> Block B: Lower Aerodynamic Science Superstructure
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 Houses 18 specialized science laboratories including atmospheric physics, geomagnetism, environmental chemistry, glaciology research, and high-performance telemetry server racks.
@@ -244,8 +244,8 @@ export function MaitriStationView({ onSwitchStation }) {
 
           {selectedLevel === 'blockC' && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-emerald-300 uppercase flex items-center gap-2">
-                <Zap className="w-4 h-4" /> Block C: Service Block, Diesel Gensets & Wind Turbine Spine
+              <h3 className="text-sm font-bold text-white uppercase flex items-center gap-2">
+                <Zap className="w-4 h-4 text-slate-400" /> Block C: Service Block, Diesel Gensets & Wind Turbine Spine
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 Houses Cummins 250kW DG sets, twin thermal exhaust stacks, heat recovery exchangers, and twin vertical-axis wind turbines mounted on the module roof spine.
@@ -255,8 +255,8 @@ export function MaitriStationView({ onSwitchStation }) {
 
           {selectedLevel === 'lake' && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-blue-300 uppercase flex items-center gap-2">
-                <Waves className="w-4 h-4" /> Lake Priyadarshini Sub-Ice Freshwater Intake Station
+              <h3 className="text-sm font-bold text-white uppercase flex items-center gap-2">
+                <Waves className="w-4 h-4 text-slate-400" /> Lake Priyadarshini Sub-Ice Freshwater Intake Station
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 Pumps pristine freshwater from Lake Priyadarshini through 380 meters of trace-heated insulated conduits into the station's central filtration and reverse osmosis desalination plant.
@@ -266,8 +266,8 @@ export function MaitriStationView({ onSwitchStation }) {
 
           {selectedLevel === 'site' && (
             <div className="space-y-2">
-              <h3 className="text-sm font-bold text-purple-300 uppercase flex items-center gap-2">
-                <Database className="w-4 h-4" /> Schirmacher Oasis Container Depot & Polar Fuel Yard
+              <h3 className="text-sm font-bold text-white uppercase flex items-center gap-2">
+                <Database className="w-4 h-4 text-slate-400" /> Schirmacher Oasis Container Depot & Polar Fuel Yard
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
                 Surrounding the V-truss steel stilts are ISO shipping containers storing scientific drill rigs, snowcat spares, emergency rations, and 48,500 L of polar-grade Jet A-1 fuel.
@@ -278,52 +278,52 @@ export function MaitriStationView({ onSwitchStation }) {
       </section>
 
       {/* Subsystem Telemetry Widgets Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-800/80 pb-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-[#202632] pb-2">
         <button
           onClick={() => setActiveSubsystem('microgrid')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold font-mono transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all ${
             activeSubsystem === 'microgrid'
-              ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-500/20'
-              : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-slate-800 text-white border border-slate-700 shadow-sm'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
-          <Zap className="w-4 h-4" />
+          <Zap className="w-4 h-4 text-slate-400" />
           A. Microgrid & Wind Spine
         </button>
 
         <button
           onClick={() => setActiveSubsystem('riometer')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold font-mono transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all ${
             activeSubsystem === 'riometer'
-              ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-500/20'
-              : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-slate-800 text-white border border-slate-700 shadow-sm'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
-          <Radio className="w-4 h-4" />
+          <Radio className="w-4 h-4 text-slate-400" />
           B. Cosmic Noise Riometer
         </button>
 
         <button
           onClick={() => setActiveSubsystem('lake')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold font-mono transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all ${
             activeSubsystem === 'lake'
-              ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-500/20'
-              : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-slate-800 text-white border border-slate-700 shadow-sm'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
-          <Waves className="w-4 h-4" />
+          <Waves className="w-4 h-4 text-slate-400" />
           C. Priyadarshini Hydronics
         </button>
 
         <button
           onClick={() => setActiveSubsystem('madrid')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold font-mono transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all ${
             activeSubsystem === 'madrid'
-              ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-500/20'
-              : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-slate-800 text-white border border-slate-700 shadow-sm'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
-          <ShieldCheck className="w-4 h-4" />
+          <ShieldCheck className="w-4 h-4 text-slate-400" />
           D. Habitat & Waste Treatment
         </button>
       </div>
@@ -331,34 +331,34 @@ export function MaitriStationView({ onSwitchStation }) {
       {/* Telemetry Widgets */}
       {activeSubsystem === 'microgrid' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Total Station Electrical Load</span>
-              <Activity className="w-4 h-4 text-amber-400" />
+              <span className="font-mono uppercase font-medium">Total Station Electrical Load</span>
+              <Activity className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-white">{totalLoadKw} kW</p>
+            <p className="text-3xl font-bold font-mono text-white tracking-tight">{totalLoadKw} kW</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Cummins DG-1 & DG-2 coupled with 24.8 kW wind spine & 38.5 kW roof solar PV array.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Wind Spine Generation</span>
-              <Wind className="w-4 h-4 text-cyan-400" />
+              <span className="font-mono uppercase font-medium">Wind Spine Generation</span>
+              <Wind className="w-4 h-4 text-sky-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-cyan-300">24.8 kW</p>
+            <p className="text-3xl font-bold font-mono text-sky-400 tracking-tight">24.8 kW</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Vertical-axis wind turbines mounted on Service Block C spine operating under 28.4 knot gusts.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Fuel Reserves & Burn Rate</span>
+              <span className="font-mono uppercase font-medium">Fuel Reserves & Burn Rate</span>
               <Database className="w-4 h-4 text-emerald-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-emerald-300">{fuelReserve}</p>
+            <p className="text-3xl font-bold font-mono text-emerald-400 tracking-tight">{fuelReserve}</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Burn Rate: 24.5 L/hr | Projected Runtime: 82.5 Days remaining before resupply ship.
             </p>
@@ -368,34 +368,34 @@ export function MaitriStationView({ onSwitchStation }) {
 
       {activeSubsystem === 'riometer' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Ionospheric Noise Absorption</span>
+              <span className="font-mono uppercase font-medium">Ionospheric Noise Absorption</span>
               <Radio className="w-4 h-4 text-amber-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-amber-300">{riometerDb} dB</p>
+            <p className="text-3xl font-bold font-mono text-white tracking-tight">{riometerDb} dB</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               38.2 MHz wide-beam riometer tracking solar particle flux & geomagnetic storm events.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Space Weather Flare Status</span>
-              <Cpu className="w-4 h-4 text-teal-400" />
+              <span className="font-mono uppercase font-medium">Space Weather Flare Status</span>
+              <Cpu className="w-4 h-4 text-sky-400" />
             </div>
-            <p className="text-xl font-bold font-mono text-white">{riometerStatus}</p>
+            <p className="text-xl font-bold font-mono text-emerald-400">{riometerStatus}</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Satcom link degradation: 0.8 dB | Store-and-forward edge fallback ready.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">VSAT Terminal Link</span>
-              <Gauge className="w-4 h-4 text-purple-400" />
+              <span className="font-mono uppercase font-medium">VSAT Terminal Link</span>
+              <Gauge className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-purple-300">480 Mbps</p>
+            <p className="text-3xl font-bold font-mono text-white tracking-tight">480 Mbps</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Dedicated polar satellite transceiver link connecting Maitri directly to NCPOR Goa.
             </p>
@@ -405,34 +405,34 @@ export function MaitriStationView({ onSwitchStation }) {
 
       {activeSubsystem === 'lake' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Priyadarshini Intake Temp</span>
-              <Waves className="w-4 h-4 text-cyan-400" />
+              <span className="font-mono uppercase font-medium">Priyadarshini Intake Temp</span>
+              <Waves className="w-4 h-4 text-sky-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-cyan-300">+3.8°C</p>
+            <p className="text-3xl font-bold font-mono text-sky-400 tracking-tight">+3.8°C</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Sub-ice freshwater intake maintaining continuous circulation via trace-heated conduits.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Potable Water Production</span>
+              <span className="font-mono uppercase font-medium">Potable Water Production</span>
               <RefreshCw className="w-4 h-4 text-emerald-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-emerald-300">11,500 L / day</p>
+            <p className="text-3xl font-bold font-mono text-emerald-400 tracking-tight">11,500 L / day</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Filtration & Reverse Osmosis plant delivering pure drinking water to Block A.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Ambient Oasis Weather</span>
-              <Wind className="w-4 h-4 text-blue-400" />
+              <span className="font-mono uppercase font-medium">Ambient Oasis Weather</span>
+              <Wind className="w-4 h-4 text-slate-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-white">{ambientTemp}</p>
+            <p className="text-3xl font-bold font-mono text-white tracking-tight">{ambientTemp}</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Wind: 28.4 knots ESE | Barometric Pressure: 981.2 hPa | Permafrost: Stable.
             </p>
@@ -442,21 +442,21 @@ export function MaitriStationView({ onSwitchStation }) {
 
       {activeSubsystem === 'madrid' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">MBR Waste Purity</span>
+              <span className="font-mono uppercase font-medium">MBR Waste Purity</span>
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
             </div>
-            <p className="text-3xl font-bold font-mono text-emerald-400">99.4%</p>
+            <p className="text-3xl font-bold font-mono text-emerald-400 tracking-tight">99.4%</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               Zero-discharge membrane bioreactor fully compliant with Madrid Protocol Antarctic Treaty.
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">V-Stilts Structural Load</span>
-              <Layers className="w-4 h-4 text-amber-400" />
+              <span className="font-mono uppercase font-medium">V-Stilts Structural Load</span>
+              <Layers className="w-4 h-4 text-slate-400" />
             </div>
             <p className="text-xl font-bold font-mono text-white">Steel Truss Secure</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
@@ -464,12 +464,12 @@ export function MaitriStationView({ onSwitchStation }) {
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3 backdrop-blur-md">
+          <div className="bg-[#12161D] border border-[#202632] rounded-xl p-5 space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span className="font-mono uppercase font-semibold">Incinerator Status</span>
-              <Flame className="w-4 h-4 text-rose-400" />
+              <span className="font-mono uppercase font-medium">Incinerator Status</span>
+              <Flame className="w-4 h-4 text-emerald-400" />
             </div>
-            <p className="text-xl font-bold font-mono text-emerald-300">ACTIVE CYCLE</p>
+            <p className="text-xl font-bold font-mono text-emerald-400">ACTIVE CYCLE</p>
             <p className="text-xs text-slate-400 leading-relaxed font-mono">
               High-temperature bio-waste incinerator with particulate scrubbers operational.
             </p>

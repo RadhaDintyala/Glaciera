@@ -30,7 +30,7 @@ export function Navbar({ activePage, setActivePage }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#123836]/95 backdrop-blur-md text-white border-b border-[#1d4d4a] shadow-md transition-colors duration-100">
+    <header className="sticky top-0 z-50 w-full bg-[#0B0D11]/90 backdrop-blur-md text-slate-100 border-b border-[#202632] shadow-sm transition-colors duration-100">
       <div className="max-w-[1700px] mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
         
         {/* Brand Logo & Platform Name */}
@@ -38,10 +38,10 @@ export function Navbar({ activePage, setActivePage }) {
           onClick={() => handleNavClick('overview')}
           className="flex flex-col cursor-pointer group select-none transition-transform duration-100 active:scale-95"
         >
-          <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white font-sans leading-tight group-hover:text-teal-200 transition-colors duration-100">
+          <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white font-sans leading-tight group-hover:text-sky-300 transition-colors duration-100">
             Glaciera
           </span>
-          <p className="text-xs sm:text-sm font-sans text-teal-100/85 font-normal tracking-wide">
+          <p className="text-xs sm:text-sm font-sans text-slate-400 font-normal tracking-wide">
             Indian Antarctic Remote Operations Platform
           </p>
         </div>
@@ -56,8 +56,8 @@ export function Navbar({ activePage, setActivePage }) {
                 onClick={() => handleNavClick(item.id, item.station)}
                 className={`px-4 py-1.5 rounded-full cursor-pointer transition-all duration-100 ease-out select-none active:scale-95 ${
                   active
-                    ? 'bg-white text-[#123836] font-bold shadow-md shadow-black/10'
-                    : 'text-teal-50/90 hover:text-white hover:bg-white/15'
+                    ? 'bg-white text-slate-950 font-semibold shadow-sm shadow-black/20'
+                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'
                 }`}
               >
                 {item.label}

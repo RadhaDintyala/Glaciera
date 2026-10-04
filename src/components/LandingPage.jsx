@@ -28,41 +28,36 @@ export function LandingHeroContent({ onNavigate }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans select-none overflow-x-hidden">
+    <div className="min-h-screen bg-[#0B0D11] text-[#F8FAFC] font-sans select-none overflow-x-hidden">
       
       {/* ------------------------------------------------------------------ */}
-      {/* 1. HERO SECTION WITH IMAGE OVERLAY & DYNAMIC GRADIENTS             */}
+      {/* 1. HERO SECTION WITH IMAGE OVERLAY & CLEAN CALIBRATED SURFACES     */}
       {/* ------------------------------------------------------------------ */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between overflow-hidden border-b border-slate-800/80">
+      <section className="relative min-h-[85vh] flex flex-col justify-between overflow-hidden border-b border-[#202632]">
         
-        {/* Background Image with Dark Vignette & Animated Radial Glowing Accents */}
+        {/* Background Image with Dark Neutral Vignette */}
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
             alt="Glaciera Antarctic Station Hero"
-            className="w-full h-full object-cover object-center scale-105 transform hover:scale-100 transition-transform duration-1000 ease-out opacity-65"
+            className="w-full h-full object-cover object-center scale-105 transform hover:scale-100 transition-transform duration-1000 ease-out opacity-45"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-slate-950" />
-          <div className="absolute inset-0 bg-radial-vignette opacity-70" />
-          
-          {/* Animated Background Glowing Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl animate-pulse pointer-events-none" />
-          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D11]/90 via-[#0B0D11]/70 to-[#0B0D11]" />
         </div>
 
         {/* Hero Top Live Status Ticker */}
         <div className="relative z-10 max-w-[1700px] w-full mx-auto px-6 pt-6 flex flex-wrap items-center justify-end gap-4">
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-300 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-800">
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <Activity className="w-3.5 h-3.5" /> SATCOM Link: OPTIMAL
+          <div className="flex items-center gap-4 text-xs font-mono text-slate-400 bg-[#12161D]/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#202632]">
+            <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> SATCOM Link: OPTIMAL
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-cyan-300">
-              <Zap className="w-3.5 h-3.5" /> Edge Gateway: ACTIVE
+            <span className="text-slate-700">|</span>
+            <span className="flex items-center gap-1.5 text-slate-300">
+              <Zap className="w-3.5 h-3.5 text-slate-400" /> Edge Gateway: ACTIVE
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="flex items-center gap-1.5 text-amber-300">
-              <Globe className="w-3.5 h-3.5" /> Dual Station Telemetry
+            <span className="text-slate-700">|</span>
+            <span className="flex items-center gap-1.5 text-slate-300">
+              <Globe className="w-3.5 h-3.5 text-slate-400" /> Dual Station Telemetry
             </span>
           </div>
         </div>
@@ -73,41 +68,41 @@ export function LandingHeroContent({ onNavigate }) {
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-sans leading-tight">
               Monitor the Extreme.{' '}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
+              <span className="block text-slate-400 font-normal">
                 Antarctic Operations Redefined.
               </span>
             </h1>
 
-            <p className="text-slate-300 text-base sm:text-xl font-normal max-w-3xl mx-auto leading-relaxed drop-shadow font-sans">
-              Next-generation 3D WebGL Digital Twin & Real-time Telemetry Platform for India's polar research stations — <strong className="text-cyan-300 font-semibold">Bharati (Larsemann Hills)</strong> and <strong className="text-amber-300 font-semibold">Maitri (Schirmacher Oasis)</strong>.
+            <p className="text-slate-300 text-base sm:text-lg font-normal max-w-3xl mx-auto leading-relaxed font-sans">
+              Next-generation 3D WebGL Digital Twin & Real-time Telemetry Platform for India's polar research stations — <span className="text-slate-100 font-medium">Bharati (Larsemann Hills)</span> and <span className="text-slate-100 font-medium">Maitri (Schirmacher Oasis)</span>.
             </p>
           </div>
 
-          {/* Interactive Action Buttons */}
+          {/* Interactive Action Buttons (Single Accent + Demoted Outline Companion) */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button
               onClick={() => handleLaunchStation('bharati')}
-              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-sans font-bold text-sm shadow-xl shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white text-slate-950 font-semibold text-sm hover:bg-slate-200 transition-all shadow-sm border border-white/20 cursor-pointer"
             >
-              <Box className="w-5 h-5 text-cyan-200" />
+              <Box className="w-4 h-4 text-slate-800" />
               <span>Launch Bharati 3D Twin</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </button>
 
             <button
               onClick={() => handleLaunchStation('maitri')}
-              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-sans font-bold text-sm shadow-xl shadow-amber-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#181D26] text-slate-200 font-medium text-sm border border-[#202632] hover:bg-[#1F2633] hover:text-white transition-all cursor-pointer"
             >
-              <Box className="w-5 h-5 text-amber-200" />
+              <Box className="w-4 h-4 text-slate-400" />
               <span>Launch Maitri 3D Twin</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </button>
 
             <a
               href="#features-section"
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-sans font-semibold text-sm transition-all backdrop-blur-md"
+              className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-transparent border border-[#202632] hover:border-slate-700 text-slate-400 hover:text-white font-medium text-sm transition-all"
             >
-              <Compass className="w-4 h-4 text-slate-400" />
+              <Compass className="w-4 h-4 text-slate-500" />
               <span>Explore Platform Features</span>
             </a>
           </div>
@@ -116,44 +111,44 @@ export function LandingHeroContent({ onNavigate }) {
 
         {/* Hero Telemetry Live Stream Bar Overlay */}
         <footer className="relative z-20 w-full max-w-[1700px] mx-auto px-6 pb-8 pt-4">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="bg-[#12161D]/90 border border-[#202632] rounded-2xl p-4 backdrop-blur-xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
             
             <div className="flex items-center gap-3">
-              <span className="text-xs text-slate-300 font-bold tracking-wide font-mono uppercase">
+              <span className="text-xs text-slate-400 font-bold tracking-wide font-mono uppercase">
                 Glaciera Telemetry Live Stream
               </span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 font-mono">
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-5 h-5 text-cyan-400 shrink-0" />
+                <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-slate-400 block uppercase">Coordinates</span>
-                  <span className="text-base sm:text-lg font-bold text-white">69°24'S, 76°11'E</span>
+                  <span className="text-[10px] text-slate-500 block uppercase">Coordinates</span>
+                  <span className="text-sm sm:text-base font-semibold text-white">69°24'S, 76°11'E</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Thermometer className="w-5 h-5 text-amber-400 shrink-0" />
+                <Thermometer className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-slate-400 block uppercase">Maitri Ambient</span>
-                  <span className="text-base sm:text-lg font-bold text-white">{maitriTemp}</span>
+                  <span className="text-[10px] text-slate-500 block uppercase">Maitri Ambient</span>
+                  <span className="text-sm sm:text-base font-semibold text-white">{maitriTemp}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Wind className="w-5 h-5 text-blue-400 shrink-0" />
+                <Wind className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-slate-400 block uppercase">Bharati Wind</span>
-                  <span className="text-base sm:text-lg font-bold text-white">{bharatiWind}</span>
+                  <span className="text-[10px] text-slate-500 block uppercase">Bharati Wind</span>
+                  <span className="text-sm sm:text-base font-semibold text-white">{bharatiWind}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Radio className="w-5 h-5 text-emerald-400 shrink-0" />
+                <Radio className="w-4 h-4 text-slate-400 shrink-0" />
                 <div>
-                  <span className="text-[10px] text-slate-400 block uppercase">ISRO Downlink</span>
-                  <span className="text-base sm:text-lg font-bold text-white">1.24 Gbps</span>
+                  <span className="text-[10px] text-slate-500 block uppercase">ISRO Downlink</span>
+                  <span className="text-sm sm:text-base font-semibold text-white">1.24 Gbps</span>
                 </div>
               </div>
             </div>
@@ -169,7 +164,7 @@ export function LandingHeroContent({ onNavigate }) {
       <section className="py-16 px-6 max-w-[1700px] mx-auto space-y-8">
         
         <div className="text-center max-w-3xl mx-auto space-y-2">
-          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40 uppercase tracking-widest">
+          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-[#12161D] text-slate-400 border border-[#202632] uppercase tracking-widest">
             Dual Antarctic Research Hubs
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight">
@@ -185,26 +180,25 @@ export function LandingHeroContent({ onNavigate }) {
           {/* Bharati Station Card */}
           <div 
             onClick={() => handleLaunchStation('bharati')}
-            className="group relative bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-cyan-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-2xl shadow-2xl hover:border-cyan-400 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
+            className="group relative bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 sm:p-8 backdrop-blur-md transition-all duration-200 cursor-pointer overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all pointer-events-none" />
-
             <div className="space-y-5">
               <div className="flex items-center justify-between">
-                <div className="p-3 rounded-2xl bg-cyan-950/80 border border-cyan-500/50 text-cyan-400 shadow-lg">
-                  <Box className="w-7 h-7" />
+                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 shadow-sm">
+                  <Box className="w-6 h-6" />
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   ONLINE | 3D TWIN LIVE
                 </span>
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-slate-200 transition-colors">
                     Bharati Research Station
                   </h3>
-                  <span className="text-xs font-mono text-cyan-400">Est. 2012</span>
+                  <span className="text-xs font-mono text-slate-400">Est. 2012</span>
                 </div>
                 <p className="text-xs text-slate-400 font-mono mt-1">
                   Larsemann Hills, Prydz Bay, East Antarctica | 69°24'S, 76°11'E
@@ -217,26 +211,26 @@ export function LandingHeroContent({ onNavigate }) {
 
               {/* Station Quick Metrics */}
               <div className="grid grid-cols-3 gap-3 pt-2 font-mono">
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">Elevation</span>
-                  <span className="text-sm font-bold text-white">35 Meters</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">Elevation</span>
+                  <span className="text-sm font-semibold text-white">35 Meters</span>
                 </div>
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">Max Occupancy</span>
-                  <span className="text-sm font-bold text-cyan-300">47 Personnel</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">Max Occupancy</span>
+                  <span className="text-sm font-semibold text-white">47 Personnel</span>
                 </div>
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">ISRO Downlink</span>
-                  <span className="text-sm font-bold text-emerald-300">1.24 Gbps</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">ISRO Downlink</span>
+                  <span className="text-sm font-semibold text-emerald-400">1.24 Gbps</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 flex items-center justify-between border-t border-slate-800/80 mt-6">
-              <span className="text-xs font-mono text-cyan-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+            <div className="pt-6 flex items-center justify-between border-t border-[#202632] mt-6">
+              <span className="text-xs font-mono text-slate-300 flex items-center gap-1 group-hover:text-white transition-colors font-medium">
                 Launch 3D WebGL Digital Twin &rarr;
               </span>
-              <div className="p-2 rounded-xl bg-cyan-600 text-white group-hover:bg-cyan-500 transition-colors shadow-lg shadow-cyan-600/30">
+              <div className="p-2 rounded-lg bg-slate-800 text-slate-300 group-hover:bg-slate-700 group-hover:text-white transition-colors border border-slate-700/60">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
@@ -245,26 +239,25 @@ export function LandingHeroContent({ onNavigate }) {
           {/* Maitri Station Card */}
           <div 
             onClick={() => handleLaunchStation('maitri')}
-            className="group relative bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-amber-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-2xl shadow-2xl hover:border-amber-400 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
+            className="group relative bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 sm:p-8 backdrop-blur-md transition-all duration-200 cursor-pointer overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-all pointer-events-none" />
-
             <div className="space-y-5">
               <div className="flex items-center justify-between">
-                <div className="p-3 rounded-2xl bg-amber-950/80 border border-amber-500/50 text-amber-400 shadow-lg">
-                  <Box className="w-7 h-7" />
+                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 shadow-sm">
+                  <Box className="w-6 h-6" />
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/40">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   ONLINE | NEXT-GEN TWIN LIVE
                 </span>
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-amber-300 transition-colors">
+                  <h3 className="text-2xl font-bold text-white font-sans group-hover:text-slate-200 transition-colors">
                     Maitri Research Station
                   </h3>
-                  <span className="text-xs font-mono text-amber-400">Est. 1989</span>
+                  <span className="text-xs font-mono text-slate-400">Est. 1989</span>
                 </div>
                 <p className="text-xs text-slate-400 font-mono mt-1">
                   Schirmacher Oasis, Queen Maud Land, East Antarctica | 70°45'S, 11°44'E
@@ -277,26 +270,26 @@ export function LandingHeroContent({ onNavigate }) {
 
               {/* Station Quick Metrics */}
               <div className="grid grid-cols-3 gap-3 pt-2 font-mono">
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">Elevation</span>
-                  <span className="text-sm font-bold text-white">117 Meters</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">Elevation</span>
+                  <span className="text-sm font-semibold text-white">117 Meters</span>
                 </div>
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">Water Source</span>
-                  <span className="text-sm font-bold text-amber-300">Priyadarshini Lake</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">Water Source</span>
+                  <span className="text-sm font-semibold text-white">Priyadarshini Lake</span>
                 </div>
-                <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block">Space Weather</span>
-                  <span className="text-sm font-bold text-emerald-300">1.84 dB Riometer</span>
+                <div className="bg-[#0B0D11] p-3 rounded-xl border border-[#202632]">
+                  <span className="text-[10px] text-slate-500 uppercase block">Space Weather</span>
+                  <span className="text-sm font-semibold text-emerald-400">1.84 dB Riometer</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 flex items-center justify-between border-t border-slate-800/80 mt-6">
-              <span className="text-xs font-mono text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+            <div className="pt-6 flex items-center justify-between border-t border-[#202632] mt-6">
+              <span className="text-xs font-mono text-slate-300 flex items-center gap-1 group-hover:text-white transition-colors font-medium">
                 Launch 3D WebGL Digital Twin &rarr;
               </span>
-              <div className="p-2 rounded-xl bg-amber-600 text-white group-hover:bg-amber-500 transition-colors shadow-lg shadow-amber-600/30">
+              <div className="p-2 rounded-lg bg-slate-800 text-slate-300 group-hover:bg-slate-700 group-hover:text-white transition-colors border border-slate-700/60">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
@@ -311,7 +304,7 @@ export function LandingHeroContent({ onNavigate }) {
       <section id="features-section" className="py-16 px-6 max-w-[1700px] mx-auto space-y-12">
         
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/40 uppercase tracking-widest">
+          <span className="px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-[#12161D] text-slate-400 border border-[#202632] uppercase tracking-widest">
             Core Platform Capabilities
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-sans tracking-tight">
@@ -322,19 +315,19 @@ export function LandingHeroContent({ onNavigate }) {
           </p>
         </div>
 
-        {/* Feature Cards Grid */}
+        {/* Feature Cards Grid (Clean Engineering Grade) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           {/* Feature 1 */}
           <div 
             onMouseEnter={() => setHoveredCard(1)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-cyan-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Box className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Box className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               3D WebGL Digital Twin Engine
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -342,15 +335,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Level-by-Level Cutaway Floor Inspector
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Live Ground Thermal Heatmap Layers
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Blizzard Particle Physics Simulation
               </li>
             </ul>
@@ -360,12 +353,12 @@ export function LandingHeroContent({ onNavigate }) {
           <div 
             onMouseEnter={() => setHoveredCard(2)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-teal-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-teal-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-teal-950/80 border border-teal-500/40 text-teal-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Cpu className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Cpu className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-teal-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               Edge Gateway & Compression
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -373,15 +366,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 82.4% Protobuf Payload Compression Ratio
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Local Memory Queue During Polar Blackout
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Automatic Resuming Store-and-Forward
               </li>
             </ul>
@@ -391,12 +384,12 @@ export function LandingHeroContent({ onNavigate }) {
           <div 
             onMouseEnter={() => setHoveredCard(3)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-amber-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Zap className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               Microgrid & Energy Telemetry
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -404,15 +397,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 CHP Thermal Exhaust Hydronic Recovery
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Projected Fuel Runtime Days Counter
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Remote Load Shedding Breaker Control
               </li>
             </ul>
@@ -422,12 +415,12 @@ export function LandingHeroContent({ onNavigate }) {
           <div 
             onMouseEnter={() => setHoveredCard(4)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-blue-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-blue-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-blue-950/80 border border-blue-500/40 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Radio className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Radio className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               ISRO SATCOM Ground Station
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -435,15 +428,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Automatic De-Icing Thermal Shroud
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Dual-Axis Azimuth & Elevation Tracking
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 1.24 Gbps Direct Pass Downlink
               </li>
             </ul>
@@ -453,12 +446,12 @@ export function LandingHeroContent({ onNavigate }) {
           <div 
             onMouseEnter={() => setHoveredCard(5)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-emerald-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Database className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Database className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               Logistics & Life Support
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -466,15 +459,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Reverse Osmosis Desalination Tracking
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Madrid Protocol Effluent Zero-Discharge
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Expedition Ship Cargo & ETA Countdown
               </li>
             </ul>
@@ -484,12 +477,12 @@ export function LandingHeroContent({ onNavigate }) {
           <div 
             onMouseEnter={() => setHoveredCard(6)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-slate-900/60 border border-slate-800 hover:border-purple-500/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-300 space-y-4 hover:shadow-xl hover:shadow-purple-500/10 group"
+            className="bg-[#12161D] border border-[#202632] hover:border-slate-700 rounded-2xl p-6 backdrop-blur-md transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-black/20 group"
           >
-            <div className="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Activity className="w-6 h-6" />
+            <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-200 flex items-center justify-center group-hover:text-white transition-colors">
+              <Activity className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+            <h3 className="text-xl font-bold text-white font-sans">
               Space Weather & Riometer
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
@@ -497,15 +490,15 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
             <ul className="space-y-1.5 pt-2 text-xs font-mono text-slate-400">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Cosmic Noise Absorption (38.2 MHz)
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Solar Particle Flux Anomaly Trigger
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
                 Automated Fallback to Local Edge Queue
               </li>
             </ul>
@@ -519,11 +512,11 @@ export function LandingHeroContent({ onNavigate }) {
       {/* 4. SYSTEM ARCHITECTURE 5-LAYER STACK DIAGRAM                       */}
       {/* ------------------------------------------------------------------ */}
       <section className="py-16 px-6 max-w-[1700px] mx-auto">
-        <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-2xl space-y-8">
+        <div className="bg-[#12161D] border border-[#202632] rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-xl space-y-8">
           
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-[#202632] pb-6">
             <div>
-              <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block">
+              <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-widest block">
                 End-to-End System Pipeline
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-sans mt-1">
@@ -535,60 +528,60 @@ export function LandingHeroContent({ onNavigate }) {
             </p>
           </div>
 
-          {/* Visual Architecture Steps Grid */}
+          {/* Visual Architecture Steps Grid (Geometric Hairline Rhythm) */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
-              <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase">LAYER 1</span>
+            <div className="bg-[#0B0D11] p-5 rounded-2xl border border-[#202632] flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">LAYER 1</span>
               <div>
                 <h4 className="text-sm font-bold text-white font-sans">In-Situ Datasets</h4>
                 <p className="text-xs text-slate-400 mt-1 font-sans">AWS Weather, CHP Sensors, Sonar Ice, Riometer</p>
               </div>
-              <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-1 rounded w-fit border border-cyan-500/30">
+              <span className="text-[10px] font-mono text-slate-300 bg-slate-800/80 px-2 py-1 rounded w-fit border border-slate-700/50">
                 100 Hz Raw Sampling
               </span>
             </div>
 
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
-              <span className="text-[10px] font-mono font-bold text-teal-400 uppercase">LAYER 2</span>
+            <div className="bg-[#0B0D11] p-5 rounded-2xl border border-[#202632] flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">LAYER 2</span>
               <div>
                 <h4 className="text-sm font-bold text-white font-sans">Edge Gateway</h4>
                 <p className="text-xs text-slate-400 mt-1 font-sans">Protobuf Binary Serialization & Ring Buffer</p>
               </div>
-              <span className="text-[10px] font-mono text-teal-300 bg-teal-950/80 px-2 py-1 rounded w-fit border border-teal-500/30">
+              <span className="text-[10px] font-mono text-slate-300 bg-slate-800/80 px-2 py-1 rounded w-fit border border-slate-700/50">
                 82% Size Reduction
               </span>
             </div>
 
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
-              <span className="text-[10px] font-mono font-bold text-blue-400 uppercase">LAYER 3</span>
+            <div className="bg-[#0B0D11] p-5 rounded-2xl border border-[#202632] flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">LAYER 3</span>
               <div>
                 <h4 className="text-sm font-bold text-white font-sans">SATCOM Transport</h4>
                 <p className="text-xs text-slate-400 mt-1 font-sans">Store-and-Forward VSAT Link to Ground Station</p>
               </div>
-              <span className="text-[10px] font-mono text-blue-300 bg-blue-950/80 px-2 py-1 rounded w-fit border border-blue-500/30">
+              <span className="text-[10px] font-mono text-slate-300 bg-slate-800/80 px-2 py-1 rounded w-fit border border-slate-700/50">
                 1.24 Gbps ISRO Downlink
               </span>
             </div>
 
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
-              <span className="text-[10px] font-mono font-bold text-purple-400 uppercase">LAYER 4</span>
+            <div className="bg-[#0B0D11] p-5 rounded-2xl border border-[#202632] flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">LAYER 4</span>
               <div>
                 <h4 className="text-sm font-bold text-white font-sans">Cloud Ingestion</h4>
                 <p className="text-xs text-slate-400 mt-1 font-sans">NCPOR Central Gateway & WebSocket Server</p>
               </div>
-              <span className="text-[10px] font-mono text-purple-300 bg-purple-950/80 px-2 py-1 rounded w-fit border border-purple-500/30">
+              <span className="text-[10px] font-mono text-slate-300 bg-slate-800/80 px-2 py-1 rounded w-fit border border-slate-700/50">
                 Real-Time Broadcast
               </span>
             </div>
 
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3">
-              <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">LAYER 5</span>
+            <div className="bg-[#0B0D11] p-5 rounded-2xl border border-[#202632] flex flex-col justify-between space-y-3">
+              <span className="text-[10px] font-mono font-medium text-slate-400 uppercase">LAYER 5</span>
               <div>
                 <h4 className="text-sm font-bold text-white font-sans">3D Digital Twin</h4>
                 <p className="text-xs text-slate-400 mt-1 font-sans">WebGL Viewport, Cutaway & Mission Control</p>
               </div>
-              <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/80 px-2 py-1 rounded w-fit border border-emerald-500/30">
+              <span className="text-[10px] font-mono text-slate-300 bg-slate-800/80 px-2 py-1 rounded w-fit border border-slate-700/50">
                 Interactive Telemetry
               </span>
             </div>
@@ -599,7 +592,7 @@ export function LandingHeroContent({ onNavigate }) {
       </section>
 
       {/* Footer Disclaimer */}
-      <footer className="py-8 border-t border-slate-900 text-center text-xs text-slate-500 font-mono">
+      <footer className="py-8 border-t border-[#202632] text-center text-xs text-slate-500 font-mono">
         <p>Glaciera | Indian Antarctic Remote Operations Platform | NCPOR / MoES India</p>
       </footer>
 

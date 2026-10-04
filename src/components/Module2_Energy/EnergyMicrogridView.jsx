@@ -40,17 +40,17 @@ export function EnergyMicrogridView() {
     <div className="max-w-[1700px] mx-auto p-4 sm:p-6 space-y-6 animate-fade-in font-sans">
       
       {/* Module Title Header */}
-      <div className="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-5 backdrop-blur-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 shadow-2xl">
+      <div className="bg-[#12161D] border border-[#202632] rounded-2xl p-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="p-3.5 rounded-2xl bg-gradient-to-tr from-amber-600 via-orange-500 to-yellow-500 text-white shadow-xl shadow-amber-500/20">
+          <div className="p-3 rounded-xl bg-[#181D26] text-sky-400 border border-[#202632]">
             <Zap className="w-7 h-7" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-extrabold tracking-tight text-white font-sans">
-                Energy & Microgrid Management <span className="text-amber-400 font-mono text-lg font-normal">| Module 2</span>
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
+                Energy & Microgrid Management <span className="text-slate-400 font-mono text-base font-normal">| Module 2</span>
               </h1>
-              <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/40 tracking-wide uppercase">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#181D26] text-slate-300 border border-[#202632] tracking-wide uppercase">
                 SIH26060 Requirement 2
               </span>
             </div>
@@ -61,12 +61,12 @@ export function EnergyMicrogridView() {
         </div>
 
         {/* Station Switcher */}
-        <div className="flex items-center bg-slate-950 p-1.5 rounded-xl border border-slate-800 shrink-0 font-mono text-xs">
+        <div className="flex items-center bg-[#0B0D11] p-1 rounded-xl border border-[#202632] shrink-0 font-mono text-xs">
           <button
             onClick={() => setActiveStation('bharati')}
-            className={`px-4 py-2 rounded-lg font-bold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all ${
               activeStation === 'bharati'
-                ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 shadow-lg'
+                ? 'bg-white text-neutral-950 shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -74,9 +74,9 @@ export function EnergyMicrogridView() {
           </button>
           <button
             onClick={() => setActiveStation('maitri')}
-            className={`px-4 py-2 rounded-lg font-bold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all ${
               activeStation === 'maitri'
-                ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 shadow-lg'
+                ? 'bg-white text-neutral-950 shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
