@@ -37,15 +37,15 @@ export function InSituStreamsView() {
     ? '-18.2°C' 
     : `${telemetry?.maitri?.atmospheric?.ambientTemp ? Math.round(telemetry.maitri.atmospheric.ambientTemp) : -24}°C`;
   const windVelocity = isBharati 
-    ? `${telemetry?.bharati?.aws?.windSpeedKmh || 63.3} km/h` 
-    : `${telemetry?.maitri?.atmospheric?.windSpeedKmh || 52.6} km/h`;
+    ? `${telemetry?.bharati?.aws?.windSpeedKmh ?? 63.3} km/h` 
+    : `${telemetry?.maitri?.atmospheric?.windSpeedKmh ?? 52.6} km/h`;
   const totalLoad = isBharati 
-    ? `${telemetry?.bharati?.electricCircuits?.totalLoadKw || 490} kW` 
-    : `${telemetry?.maitri?.electricCircuits?.totalLoadKw || 265} kW`;
+    ? `${telemetry?.bharati?.electricCircuits?.totalLoadKw ?? 490} kW` 
+    : `${telemetry?.maitri?.electricCircuits?.totalLoadKw ?? 265} kW`;
   const riometerDb = isBharati 
-    ? `${telemetry?.bharati?.riometer?.absorptionDb || 1.12} dB` 
-    : `${telemetry?.maitri?.riometer?.absorptionDb || 1.84} dB`;
-  const driftRate = isBharati ? '1.82 mm/yr' : `${telemetry?.maitri?.gpsSurface?.driftX || 2.14} mm/yr`;
+    ? `${telemetry?.bharati?.riometer?.absorptionDb ?? 1.12} dB` 
+    : `${telemetry?.maitri?.riometer?.absorptionDb ?? 1.84} dB`;
+  const driftRate = isBharati ? '1.82 mm/yr' : `${telemetry?.maitri?.gpsSurface?.driftX ?? 2.14} mm/yr`;
 
   return (
     <div className="max-w-[1700px] mx-auto p-4 sm:p-6 space-y-6 animate-fade-in font-sans bg-[#0B0D11] min-h-screen text-[#F8FAFC]">

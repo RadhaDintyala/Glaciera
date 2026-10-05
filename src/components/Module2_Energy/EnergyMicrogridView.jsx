@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTelemetry } from '../../context/TelemetryContext';
 import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts';
 import { Zap, Sun, Wind, Fuel, Gauge, AlertTriangle, ShieldCheck, Cpu, ArrowUpRight, Flame, Layers, Sliders } from 'lucide-react';
+import { ShutdownBanner } from '../ShutdownBanner';
 
 export function EnergyMicrogridView() {
   const {
@@ -19,14 +20,14 @@ export function EnergyMicrogridView() {
   const power = stationData.electricCircuits || {};
   const fuel = stationData.fuelStorage || {};
 
-  const totalLoad = power.totalLoadKw || 265;
-  const maxCapacity = power.maxCapacityKw || 600;
+  const totalLoad = power.totalLoadKw ?? 265;
+  const maxCapacity = power.maxCapacityKw ?? 600;
   const loadPercentage = Math.min(100, Math.round((totalLoad / maxCapacity) * 100));
 
-  const dg1 = power.gen1Output || 180;
-  const dg2 = power.gen2Output || 120;
-  const solar = power.solarPvOutputKw || 45;
-  const wind = power.windTurbineOutputKw || 30;
+  const dg1 = power.gen1Output ?? 180;
+  const dg2 = power.gen2Output ?? 120;
+  const solar = power.solarPvOutputKw ?? 45;
+  const wind = power.windTurbineOutputKw ?? 30;
 
   // Chart data generation for generation mix breakdown
   const generationData = [
@@ -84,6 +85,8 @@ export function EnergyMicrogridView() {
           </button>
         </div>
       </div>
+
+      <ShutdownBanner station={activeStation === 'maitri' ? 'Maitri' : 'Bharati'} />
 
       {/* KPI Overview Banner */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
@@ -178,8 +181,8 @@ export function EnergyMicrogridView() {
               </div>
               <div className="text-xl font-extrabold text-amber-400">{dg1} kW</div>
               <div className="text-[10px] text-slate-400 space-y-0.5">
-                <div>Phase Voltage: {power.phaseVoltageA || 230} V</div>
-                <div>Frequency: {power.gridFrequencyHz || 50.0} Hz</div>
+                <div>Phase Voltage: {power.phaseVoltageA ?? 230} V</div>
+                <div>Frequency: {power.gridFrequencyHz ?? 50.0} Hz</div>
               </div>
             </div>
 
@@ -193,8 +196,8 @@ export function EnergyMicrogridView() {
               </div>
               <div className="text-xl font-extrabold text-amber-400">{dg2} kW</div>
               <div className="text-[10px] text-slate-400 space-y-0.5">
-                <div>Phase Voltage: {power.phaseVoltageB || 230} V</div>
-                <div>Frequency: {power.gridFrequencyHz || 50.0} Hz</div>
+                <div>Phase Voltage: {power.phaseVoltageB ?? 230} V</div>
+                <div>Frequency: {power.gridFrequencyHz ?? 50.0} Hz</div>
               </div>
             </div>
 

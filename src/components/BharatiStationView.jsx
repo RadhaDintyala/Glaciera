@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTelemetry } from '../context/TelemetryContext';
 import { TwinViewportCanvas } from './Layer5_DigitalTwin/TwinViewportCanvas';
 import { RiskHeatMap2DChart } from './RiskHeatMap2DChart';
+import { ShutdownBanner } from './ShutdownBanner';
 import { 
   Zap, Radio, Thermometer, ShieldCheck, Flame, Cpu, Waves, Wind, 
   Database, Gauge, RefreshCw, Layers, CheckCircle2, AlertTriangle, ChevronRight, Activity, Box,
@@ -15,6 +16,7 @@ export function BharatiStationView({ onSwitchStation }) {
     setActiveStation,
     isStormActive, 
     isGridFaultActive,
+    isBaseShutdown,
     isCutawayView,
     setIsCutawayView,
     isHeatmapActive,
@@ -32,8 +34,8 @@ export function BharatiStationView({ onSwitchStation }) {
   };
 
   // Bharati live telemetry values
-  const chpEfficiency = isGridFaultActive ? 68.4 : 94.2;
-  const heatRecoveryTemp = isGridFaultActive ? 52.1 : 84.5;
+  const chpEfficiency = isBaseShutdown ? 0 : (isGridFaultActive ? 68.4 : 94.2);
+  const heatRecoveryTemp = isBaseShutdown ? 0 : (isGridFaultActive ? 52.1 : 84.5);
   const radomeStatus = isStormActive ? 'DE-ICING ACTIVE' : 'OPTIMAL TRACKING';
   const passThroughput = isStormActive ? '480 Mbps' : '1.24 Gbps';
   const fastIceThickness = '1.85 m';
@@ -86,6 +88,8 @@ export function BharatiStationView({ onSwitchStation }) {
           </button>
         </div>
       </div>
+
+      <ShutdownBanner station="Bharati" />
 
       {/* 3D WebGL Digital Twin Viewport Section */}
       <section className="bg-[#12161D] border border-[#202632] rounded-2xl p-4 backdrop-blur-xl shadow-xl space-y-3">

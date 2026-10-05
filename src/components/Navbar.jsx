@@ -17,6 +17,7 @@ export function Navbar({ activePage, setActivePage }) {
     { id: 'maitri', label: 'Maitri 3D Twin', station: 'maitri' },
     { id: 'logistics', label: 'Logistics', station: null },
     { id: 'insitu', label: 'In-Situ Streams', station: null },
+    { id: 'crisis-management', label: 'Remote Access', station: null },
   ];
 
   const isItemActive = (item) => {
