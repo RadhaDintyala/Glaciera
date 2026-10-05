@@ -34,6 +34,11 @@ export function TelemetryProvider({ children }) {
   const [isStormActive, setIsStormActive] = useState(false);
   const [isGridFaultActive, setIsGridFaultActive] = useState(false);
 
+  // Crisis Management & Safety Overrides (synced with CrisisManagement panel + remote_Access.html)
+  const [isBaseShutdown, setIsBaseShutdown] = useState(false);
+  const [isolatedCircuits, setIsolatedCircuits] = useState({ alpha: false, bravo: false, charlie: false });
+  const [activeMacros, setActiveMacros] = useState({ blizzard: false, breach: false, gas: false });
+
   // Incident Alert Logs
   const [alerts, setAlerts] = useState([
     { id: 1, type: 'INFO', title: 'System Initialized', desc: 'Connected to NCPOR Telemetry API via SATCOM Uplink', time: new Date().toLocaleTimeString() },
@@ -45,7 +50,77 @@ export function TelemetryProvider({ children }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTelemetry((prev) => {
-        const next = generateNextTick(prev, isStormActive, isGridFaultActive);
+        const next = generateNextTick(prev, isStormActive, isGridFaultActive || isBaseShutdown);
+
+        // --- Crisis overrides: isolation trims load + trips breakers ---
+        try {
+          const iso = isolatedCircuits || {};
+          let loadTrim = 0;
+          if (iso.alpha) {
+            loadTrim += 60;
+            if (next.maitri?.electricCircuits?.breakers) next.maitri.electricCircuits.breakers.labs = 'TRIPPED';
+            if (next.bharati?.electricCircuits?.breakers) next.bharati.electricCircuits.breakers.labs = 'TRIPPED';
+          }
+          if (iso.bravo) {
+            loadTrim += 45;
+            if (next.maitri?.electricCircuits?.breakers) next.maitri.electricCircuits.breakers.livingQuarters = 'TRIPPED';
+            if (next.bharati?.electricCircuits?.breakers) next.bharati.electricCircuits.breakers.livingQuarters = 'TRIPPED';
+          }
+          if (iso.charlie) {
+            loadTrim += 85;
+            if (next.maitri?.electricCircuits?.breakers) next.maitri.electricCircuits.breakers.generatorShed = 'TRIPPED';
+            if (next.bharati?.electricCircuits?.breakers) next.bharati.electricCircuits.breakers.generatorShed = 'TRIPPED';
+          }
+          if (loadTrim > 0 && !isBaseShutdown) {
+            const cur = next.maitri?.electricCircuits?.totalLoadKw ?? 265;
+            const trimmed = Math.max(40, cur - loadTrim);
+            next.maitri.electricCircuits.totalLoadKw = +trimmed.toFixed(1);
+            next.maitri.electricCircuits.gen1Output = +(trimmed * 0.55).toFixed(1);
+            next.maitri.electricCircuits.gen2Output = +(trimmed * 0.35).toFixed(1);
+          }
+
+          // --- Macro effects ---
+          if (activeMacros?.blizzard && next.maitri?.atmospheric) {
+            next.maitri.atmospheric.livingTemp = +Math.min(28, (next.maitri.atmospheric.livingTemp || 21) + 0.6).toFixed(1);
+            next.maitri.atmospheric.labTemp = +Math.min(26, (next.maitri.atmospheric.labTemp || 19.8) + 0.4).toFixed(1);
+          }
+
+          // --- Base grid shutdown: collapse everything, visible on main dashboard ---
+          if (isBaseShutdown) {
+            if (next.maitri?.electricCircuits) {
+              next.maitri.electricCircuits.totalLoadKw = 0;
+              next.maitri.electricCircuits.gen1Output = 0;
+              next.maitri.electricCircuits.gen2Output = 0;
+              next.maitri.electricCircuits.gen3Output = 0;
+              next.maitri.electricCircuits.solarPvOutputKw = 0;
+              next.maitri.electricCircuits.windTurbineOutputKw = 0;
+              next.maitri.electricCircuits.phaseVoltageA = 0;
+              next.maitri.electricCircuits.phaseVoltageB = 0;
+              next.maitri.electricCircuits.phaseVoltageC = 0;
+              next.maitri.electricCircuits.gridFrequencyHz = 0;
+              Object.keys(next.maitri.electricCircuits.breakers || {}).forEach((k) => {
+                next.maitri.electricCircuits.breakers[k] = 'TRIPPED';
+              });
+            }
+            if (next.bharati?.electricCircuits) {
+              if (typeof next.bharati.electricCircuits.totalLoadKw !== 'undefined') next.bharati.electricCircuits.totalLoadKw = 0;
+              if (next.bharati.electricCircuits.breakers) {
+                Object.keys(next.bharati.electricCircuits.breakers).forEach((k) => {
+                  next.bharati.electricCircuits.breakers[k] = 'TRIPPED';
+                });
+              }
+            }
+            if (next.maitri?.atmospheric) {
+              next.maitri.atmospheric.livingTemp = +Math.max(4, (next.maitri.atmospheric.livingTemp || 21) - 0.8).toFixed(1);
+              next.maitri.atmospheric.labTemp = +Math.max(2, (next.maitri.atmospheric.labTemp || 19.8) - 0.8).toFixed(1);
+            }
+            if (next.maitri?.lifeSupport) {
+              next.maitri.lifeSupport.primaryHeatingLoopTempC = +Math.max(8, (next.maitri.lifeSupport.primaryHeatingLoopTempC || 82) - 2.5).toFixed(1);
+            }
+          }
+        } catch (e) {
+          // never break tick loop on override errors
+        }
         
         // Push historical record for charts (max 20 points)
         setHistory((hPrev) => {
@@ -63,8 +138,11 @@ export function TelemetryProvider({ children }) {
           return updated;
         });
 
-        // Edge queue handling during blackout
-        if (isManualBlackout || next.maitri.riometer.solarFlareState === 'CRITICAL') {
+        // Edge queue handling during blackout / shutdown
+        if (isBaseShutdown) {
+          setQueueBacklog((q) => q + 4);
+          setSatcomStatus('BLACKOUT');
+        } else if (isManualBlackout || next.maitri.riometer.solarFlareState === 'CRITICAL') {
           setQueueBacklog((q) => q + 1);
           setSatcomStatus('BLACKOUT');
         } else if (next.maitri.riometer.solarFlareState === 'MODERATE') {
@@ -82,7 +160,7 @@ export function TelemetryProvider({ children }) {
     }, 1500);
 
     return () => clearInterval(interval);
-  }, [isStormActive, isGridFaultActive, isManualBlackout]);
+  }, [isStormActive, isGridFaultActive, isManualBlackout, isBaseShutdown, isolatedCircuits, activeMacros]);
 
   // Payload Compression Calculation
   const payloadMetrics = calculatePayloadMetrics(telemetry, compressionMode);
@@ -101,6 +179,63 @@ export function TelemetryProvider({ children }) {
     if (actionName === 'RESET_HEATERS') {
       setIsGridFaultActive(false);
     }
+    if (actionName === 'ISOLATE_ALPHA') {
+      setIsolatedCircuits((p) => ({ ...p, alpha: !p.alpha }));
+    }
+    if (actionName === 'ISOLATE_BRAVO') {
+      setIsolatedCircuits((p) => ({ ...p, bravo: !p.bravo }));
+    }
+    if (actionName === 'ISOLATE_CHARLIE') {
+      setIsolatedCircuits((p) => ({ ...p, charlie: !p.charlie }));
+    }
+    if (actionName === 'MACRO_BLIZZARD') {
+      setActiveMacros((p) => ({ ...p, blizzard: true }));
+    }
+    if (actionName === 'MACRO_BREACH') {
+      setActiveMacros((p) => ({ ...p, breach: true }));
+    }
+    if (actionName === 'MACRO_GAS') {
+      setActiveMacros((p) => ({ ...p, gas: true }));
+    }
+    if (actionName === 'BASE_GRID_SHUTDOWN') {
+      setIsBaseShutdown(true);
+      setIsGridFaultActive(true);
+      setIsManualBlackout(true);
+    }
+    if (actionName === 'REENERGIZE_GRID') {
+      setIsBaseShutdown(false);
+      setIsGridFaultActive(false);
+      setIsManualBlackout(false);
+      setIsolatedCircuits({ alpha: false, bravo: false, charlie: false });
+    }
+  };
+
+  const executeBaseShutdown = (reason) => {
+    setIsBaseShutdown(true);
+    setIsGridFaultActive(true);
+    setIsManualBlackout(true);
+    setAlerts((prev) => [{
+      id: Date.now(),
+      type: 'CRITICAL',
+      title: 'BASE GRID SHUTDOWN EXECUTED',
+      desc: reason || 'Main 11kV bus tripped - hydraulic prime movers severed. Dashboard metrics collapsed to zero.',
+      time: new Date().toLocaleTimeString()
+    }, ...prev]);
+  };
+
+  const resetBaseShutdown = () => {
+    setIsBaseShutdown(false);
+    setIsGridFaultActive(false);
+    setIsManualBlackout(false);
+    setIsolatedCircuits({ alpha: false, bravo: false, charlie: false });
+    setActiveMacros({ blizzard: false, breach: false, gas: false });
+    setAlerts((prev) => [{
+      id: Date.now(),
+      type: 'INFO',
+      title: 'GRID RE-ENERGIZED',
+      desc: 'Base grid restored. Telemetry recovering on main dashboard.',
+      time: new Date().toLocaleTimeString()
+    }, ...prev]);
   };
 
   const addAlert = (type, title, desc) => {
@@ -154,7 +289,16 @@ export function TelemetryProvider({ children }) {
         setIsStormActive,
         isGridFaultActive,
         setIsGridFaultActive,
+        isBaseShutdown,
+        setIsBaseShutdown,
+        isolatedCircuits,
+        setIsolatedCircuits,
+        activeMacros,
+        setActiveMacros,
+        executeBaseShutdown,
+        resetBaseShutdown,
         alerts,
+        setAlerts,
         addAlert,
         payloadMetrics,
         triggerEdgeAction,

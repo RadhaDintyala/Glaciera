@@ -14,6 +14,7 @@ import { SatcomControlPanel } from './components/Layer3_SatcomNetwork/SatcomCont
 import { CloudGatewayPanel } from './components/Layer4_CloudGateway/CloudGatewayPanel';
 import { TwinViewportCanvas } from './components/Layer5_DigitalTwin/TwinViewportCanvas';
 import { MissionControl2D } from './components/MissionControl2D/MissionControl2D';
+import { CrisisManagement } from './components/CrisisManagement';
 import { Layers, ArrowDown, Monitor, Box, LayoutGrid } from 'lucide-react';
 
 function MonitoringPage() {
@@ -187,6 +188,11 @@ function MainAppContent() {
         {activePage === 'maitri' && <MaitriStationView onSwitchStation={handleStationSwitch} />}
         {activePage === 'logistics' && <InventoryLogisticsView />}
         {(activePage === 'insitu' || activePage === 'data') && <InSituStreamsView />}
+        {activePage === 'crisis-management' && (
+          <div className="w-full bg-[#0B0D11] py-4">
+            <CrisisManagement />
+          </div>
+        )}
       </div>
     </div>
   );

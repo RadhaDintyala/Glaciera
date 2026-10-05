@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTelemetry } from '../context/TelemetryContext';
 import { TwinViewportCanvas } from './Layer5_DigitalTwin/TwinViewportCanvas';
 import { RiskHeatMap2DChart } from './RiskHeatMap2DChart';
+import { ShutdownBanner } from './ShutdownBanner';
 import { 
   Zap, Radio, Thermometer, ShieldCheck, Flame, Cpu, Waves, Wind, 
   Database, Gauge, RefreshCw, Layers, CheckCircle2, AlertTriangle, ChevronRight, Activity, Box,
@@ -15,6 +16,7 @@ export function MaitriStationView({ onSwitchStation }) {
     setActiveStation,
     isStormActive, 
     isGridFaultActive,
+    isBaseShutdown,
     isCutawayView,
     setIsCutawayView,
     isHeatmapActive,
@@ -32,7 +34,7 @@ export function MaitriStationView({ onSwitchStation }) {
   };
 
   // Maitri live telemetry values from context / fallbacks
-  const totalLoadKw = telemetry?.maitri?.electricCircuits?.totalLoadKw || (isGridFaultActive ? 360.2 : 265.2);
+  const totalLoadKw = isBaseShutdown ? 0 : (telemetry?.maitri?.electricCircuits?.totalLoadKw ?? (isGridFaultActive ? 360.2 : 265.2));
   const riometerDb = telemetry?.maitri?.riometer?.absorptionDb || (isStormActive ? 4.85 : 1.84);
   const riometerStatus = telemetry?.maitri?.riometer?.solarFlareState || (isStormActive ? 'CRITICAL FLARE' : 'QUIET');
   const fuelReserve = telemetry?.maitri?.fuelStorage?.totalReserveLiters 
@@ -88,6 +90,8 @@ export function MaitriStationView({ onSwitchStation }) {
           </button>
         </div>
       </div>
+
+      <ShutdownBanner station="Maitri" />
 
       {/* 3D WebGL Digital Twin Viewport Section */}
       <section className="bg-[#12161D] border border-[#202632] rounded-2xl p-4 backdrop-blur-xl shadow-xl space-y-3">

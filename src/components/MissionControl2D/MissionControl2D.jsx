@@ -14,7 +14,8 @@ export function MissionControl2D() {
     triggerEdgeAction,
     alerts,
     isGridFaultActive,
-    setIsGridFaultActive
+    setIsGridFaultActive,
+    isBaseShutdown
   } = useTelemetry();
 
   const [commandInput, setCommandInput] = useState('');
@@ -143,7 +144,7 @@ export function MissionControl2D() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
             {Object.keys(breakerStates).map((key) => {
-              const isTripped = breakerStates[key] === 'TRIPPED' || (isGridFaultActive && key === 'hvacPrimary');
+              const isTripped = isBaseShutdown || breakerStates[key] === 'TRIPPED' || (isGridFaultActive && key === 'hvacPrimary');
               return (
                 <div
                   key={key}
