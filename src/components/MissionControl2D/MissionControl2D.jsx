@@ -188,9 +188,9 @@ export function MissionControl2D() {
                 <span>Gen 1 Primary Output</span>
                 <span className="text-amber-400">{maitriPower.gen1Output} kW</span>
               </div>
-              <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+              <div className="w-full h-2 bg-[#0B0D11] rounded-full overflow-hidden border border-[#202632]">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-amber-500 transition-all duration-500"
+                  className="h-full bg-sky-400 transition-all duration-500"
                   style={{ width: `${(maitriPower.gen1Output / 200) * 100}%` }}
                 />
               </div>
@@ -201,9 +201,9 @@ export function MissionControl2D() {
                 <span>Gen 2 Auxiliary Output</span>
                 <span className="text-amber-400">{maitriPower.gen2Output} kW</span>
               </div>
-              <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+              <div className="w-full h-2 bg-[#0B0D11] rounded-full overflow-hidden border border-[#202632]">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-amber-500 transition-all duration-500"
+                  className="h-full bg-sky-400 transition-all duration-500"
                   style={{ width: `${(maitriPower.gen2Output / 200) * 100}%` }}
                 />
               </div>
@@ -296,11 +296,11 @@ export function MissionControl2D() {
             value={commandInput}
             onChange={(e) => setCommandInput(e.target.value)}
             placeholder="Type custom Level 2 remote edge command (e.g. SET_GENERATOR_LOAD 80%)..."
-            className="flex-1 bg-slate-900 border border-rose-500/40 text-rose-200 text-xs font-mono rounded-lg px-3 py-2 focus:outline-none focus:border-rose-400"
+            className="flex-1 bg-[#0B0D11] border border-[#202632] text-slate-100 text-xs font-mono rounded-lg px-3 py-2 focus:outline-none focus:border-sky-400"
           />
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-rose-500/20"
+            className="btn-accent-clean px-4 py-2 rounded-lg font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
           >
             <Send className="w-3.5 h-3.5" /> Dispatch L2
           </button>

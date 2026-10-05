@@ -94,10 +94,10 @@ export function SatcomControlPanel() {
           </div>
           <button
             onClick={() => setIsManualBlackout(!isManualBlackout)}
-            className={`px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
               isManualBlackout
-                ? 'bg-rose-600 text-white shadow-lg shadow-rose-500/30'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                ? 'btn-primary-clean'
+                : 'btn-secondary-clean'
             }`}
           >
             {isManualBlackout ? 'RECONNECT' : 'SIMULATE CUT'}

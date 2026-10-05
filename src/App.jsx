@@ -184,15 +184,12 @@ function MainAppContent() {
       {/* Page Routing Container */}
       <div className="flex-1 w-full">
         {activePage === 'overview' && <LandingHeroContent onNavigate={handleNavigate} />}
+
         {(activePage === '3d-twin' || activePage === 'bharati') && <BharatiStationView onSwitchStation={handleStationSwitch} />}
         {activePage === 'maitri' && <MaitriStationView onSwitchStation={handleStationSwitch} />}
         {activePage === 'logistics' && <InventoryLogisticsView />}
         {(activePage === 'insitu' || activePage === 'data') && <InSituStreamsView />}
-        {activePage === 'crisis-management' && (
-          <div className="w-full bg-[#0B0D11] py-4">
-            <CrisisManagement />
-          </div>
-        )}
+        {activePage === 'crisis-management' && <CrisisManagement />}
       </div>
     </div>
   );
